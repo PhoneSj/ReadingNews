@@ -1,5 +1,6 @@
 package com.phonesj.news.model.db;
 
+import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.ReadStateBean;
 
 import javax.inject.Inject;
@@ -42,6 +43,35 @@ public class RealmHelper implements DBHelper {
             if (bean.getId() == id) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    public void inertLikeBean(LikeBean bean) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(bean);
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public void deleteLikeBean(String id) {
+        LikeBean bean = mRealm.where(LikeBean.class).equalTo("id", id).findFirst();
+        mRealm.beginTransaction();
+        if (bean != null) {
+            bean.deleteFromRealm();
+        }
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public boolean queryLikeId(String id) {
+        RealmResults<LikeBean> realmResults = mRealm
+            .where(LikeBean.class)
+            .equalTo("id", id)
+            .findAll();
+        if (realmResults != null && realmResults.size() > 0) {
+            return true;
         }
         return false;
     }

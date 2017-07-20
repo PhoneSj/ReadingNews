@@ -1,9 +1,11 @@
 package com.phonesj.news.model;
 
 import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
+import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
@@ -71,6 +73,16 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public Flowable<CommonBean> fetchShortCommonInfo(int id) {
+        return mHttpHelper.fetchShortCommonInfo(id);
+    }
+
+    @Override
+    public Flowable<CommonBean> fetchLongCommonInfo(int id) {
+        return mHttpHelper.fetchLongCommonInfo(id);
+    }
+
+    @Override
     public boolean getNightModeState() {
         return mSPHelper.getNightModeState();
     }
@@ -118,5 +130,20 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     @Override
     public boolean queryNewsId(int id) {
         return mDBHelper.queryNewsId(id);
+    }
+
+    @Override
+    public void inertLikeBean(LikeBean bean) {
+        mDBHelper.inertLikeBean(bean);
+    }
+
+    @Override
+    public void deleteLikeBean(String id) {
+        mDBHelper.deleteLikeBean(id);
+    }
+
+    @Override
+    public boolean queryLikeId(String id) {
+        return mDBHelper.queryLikeId(id);
     }
 }

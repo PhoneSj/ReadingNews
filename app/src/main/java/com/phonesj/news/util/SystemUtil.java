@@ -3,6 +3,7 @@ package com.phonesj.news.util;
 import com.phonesj.news.app.App;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 
 /**
  * Created by Phone on 2017/7/19.
@@ -33,5 +34,16 @@ public class SystemUtil {
     public static int px2dp(float pxValue) {
         final float scale = App.getInstance().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 检查是否有可用网络
+     */
+    public static boolean isNetworkConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) App
+            .getInstance()
+            .getApplicationContext()
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo() != null;
     }
 }

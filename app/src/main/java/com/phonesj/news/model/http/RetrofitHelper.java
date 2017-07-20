@@ -1,6 +1,7 @@
 package com.phonesj.news.model.http;
 
 import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
@@ -66,4 +67,15 @@ public class RetrofitHelper implements HttpHelper {
     public Flowable<ZhihuDetailExtraBean> fetchZhihuDetailExtraInfo(int id) {
         return zhihuApis.getZhihuDetailExtraInfo(id);
     }
+
+    @Override
+    public Flowable<CommonBean> fetchShortCommonInfo(int id) {
+        return zhihuApis.getShortCommonInfo(id);
+    }
+
+    @Override
+    public Flowable<CommonBean> fetchLongCommonInfo(int id) {
+        return zhihuApis.getLongCommonInfo(id);
+    }
+
 }

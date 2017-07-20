@@ -33,6 +33,10 @@ public class Constants {
 
     public static final int TYPE_ABOUT = 112;
 
+    public static final int ZHIHU_COMMON_TYPE_SHORT = 201;
+
+    public static final int ZHIHU_COMMON_TYPE_LONG = 202;
+
     //========================sp=======================
     public static final String SP_NIGHT_MODE = "night_mode";
 
@@ -44,5 +48,19 @@ public class Constants {
 
     //========================intent=======================
     public static final String INTENT_ZHIHU_DETAIL_ID = "zhihu_detail_id";
+
     public static final String INTENT_ZHIHU_DETAIL_TRANSITION = "zhihu_detail_transition";
+
+    public static final String INTENT_ZHIHU_COMMON_ID = "zhihu_common_id";
+
+    public static final String INTENT_ZHIHU_COMMON_ALL_NUM = "zhihu_common_all_num";
+
+    public static final String INTENT_ZHIHU_COMMONT_SHORT_NUM = "zhihu_commont_short_num";
+
+    public static final String INTENT_ZHIHU_COMMONT_LONG_NUM = "zhihu_commont_long_num";
+
+    //=======================bundle=========================
+    public static final String BUNDLE_ZHIHU_COMMON_ID = "zhihu_common_id";
+
+    public static final String BUNDLE_ZHIHU_COMMON_KIND = "zhihu_common_kind";
 }

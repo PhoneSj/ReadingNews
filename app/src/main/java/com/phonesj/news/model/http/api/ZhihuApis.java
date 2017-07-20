@@ -1,6 +1,7 @@
 package com.phonesj.news.model.http.api;
 
 import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
@@ -44,4 +45,10 @@ public interface ZhihuApis {
 
     @GET("story-extra/{id}")
     Flowable<ZhihuDetailExtraBean> getZhihuDetailExtraInfo(@Path("id") int id);
+
+    @GET("story/{id}/short-comments")
+    Flowable<CommonBean> getShortCommonInfo(@Path("id") int id);
+
+    @GET("story/{id}/long-comments")
+    Flowable<CommonBean> getLongCommonInfo(@Path("id") int id);
 }

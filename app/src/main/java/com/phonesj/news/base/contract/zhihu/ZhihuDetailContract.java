@@ -33,8 +33,8 @@ public interface ZhihuDetailContract {
 
         void queryLikeData(int id);
 
-        void getNoImageState();
+        boolean getNoImageState();
 
-        void getAutoCacheState();
+        boolean getAutoCacheState();
     }
 }

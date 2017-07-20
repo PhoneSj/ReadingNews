@@ -1,6 +1,7 @@
 package com.phonesj.news.model.http;
 
 import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
@@ -76,4 +77,20 @@ public interface HttpHelper {
      * @return
      */
     Flowable<ZhihuDetailExtraBean> fetchZhihuDetailExtraInfo(int id);
+
+    /**
+     * 获取知乎的短评论
+     *
+     * @param id
+     * @return
+     */
+    Flowable<CommonBean> fetchShortCommonInfo(int id);
+
+    /**
+     * 获取知乎的长评论
+     *
+     * @param id
+     * @return
+     */
+    Flowable<CommonBean> fetchLongCommonInfo(int id);
 }

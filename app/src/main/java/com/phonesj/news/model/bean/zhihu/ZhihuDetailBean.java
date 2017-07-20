@@ -85,7 +85,7 @@ public class ZhihuDetailBean {
     private SectionBean section;
     private int type;
     private int id;
-    private List<?> js;
+    private List<String> js;
     private List<RecommendersBean> recommenders;
     private List<String> images;
     private List<String> css;
@@ -162,11 +162,11 @@ public class ZhihuDetailBean {
         this.id = id;
     }
 
-    public List<?> getJs() {
+    public List<String> getJs() {
         return js;
     }
 
-    public void setJs(List<?> js) {
+    public void setJs(List<String> js) {
         this.js = js;
     }
 
