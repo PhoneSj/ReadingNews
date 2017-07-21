@@ -25,6 +25,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.ViewHolder> {
 
     private Context mContext;
     private List<HotBean.RecentBean> datas;
+    private OnItemClickListener onItemClickListener;
 
     public HotAdapter(Context mContext, List<HotBean.RecentBean> datas) {
         this.mContext = mContext;
@@ -40,7 +41,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(HotAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final HotAdapter.ViewHolder holder, final int position) {
         ImageLoader.load(mContext, datas.get(position).getThumbnail(), holder.ivDailyItemImage);
         holder.tvDailyItemTitle.setText(datas.get(position).getTitle());
         if (datas.get(position).getReadState()) {
@@ -49,12 +50,23 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.ViewHolder> {
             holder.tvDailyItemTitle.setTextColor(ContextCompat.getColor(mContext, R.color.news_unread));
         }
 
-        // TODO: 2017/7/19 设置点击事件
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(holder.itemView, position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return datas == null ? 0 : datas.size();
+    }
+
+    public void setReadState(int position, boolean state) {
+        datas.get(position).setReadState(state);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,5 +80,13 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

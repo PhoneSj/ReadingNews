@@ -1,18 +1,22 @@
 package com.phonesj.news.ui.zhihu.fragment;
 
 import com.phonesj.news.R;
+import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RootFragment;
 import com.phonesj.news.base.contract.zhihu.HotConstract;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.presenter.zhihu.HotPresenter;
+import com.phonesj.news.ui.zhihu.activity.ZhihuDetailActivity;
 import com.phonesj.news.ui.zhihu.adapter.HotAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import butterknife.BindView;
 
 /**
@@ -45,6 +49,21 @@ public class HotFragment extends RootFragment<HotPresenter> implements HotConstr
         mAdapter = new HotAdapter(mContext, recentBeanList);
         viewMain.setLayoutManager(new LinearLayoutManager(mContext));
         viewMain.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new HotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mAdapter.setReadState(position, true);
+                mAdapter.notifyItemChanged(position);
+
+                Intent intent = new Intent(mContext, ZhihuDetailActivity.class);
+                intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_ID, recentBeanList
+                    .get(position)
+                    .getNews_id());
+                startActivity(intent);
+            }
+        });
+
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

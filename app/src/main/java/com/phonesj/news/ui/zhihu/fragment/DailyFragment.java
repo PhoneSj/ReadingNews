@@ -8,6 +8,7 @@ import com.phonesj.news.base.contract.zhihu.DailyConstract;
 import com.phonesj.news.component.RxBus;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 import com.phonesj.news.presenter.zhihu.DailyPresenter;
 import com.phonesj.news.ui.zhihu.activity.CalenderActivity;
 import com.phonesj.news.ui.zhihu.activity.ZhihuDetailActivity;
@@ -44,7 +45,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     String currentDate;
     DailyAdapter mAdapter;
-    List<DailyBean.StoriesBean> storiesBeanList = new ArrayList<DailyBean.StoriesBean>();
+    List<StoriesBean> storiesBeanList = new ArrayList<StoriesBean>();
 
     boolean hasInterval = false;
     Unbinder unbinder;

@@ -1,18 +1,22 @@
 package com.phonesj.news.ui.zhihu.fragment;
 
 import com.phonesj.news.R;
+import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RootFragment;
 import com.phonesj.news.base.contract.zhihu.SectionConstract;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.presenter.zhihu.SectionPresenter;
+import com.phonesj.news.ui.zhihu.activity.SectionActivity;
 import com.phonesj.news.ui.zhihu.adapter.SectionAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import butterknife.BindView;
 
 /**
@@ -45,6 +49,20 @@ public class SectionFragment extends RootFragment<SectionPresenter> implements S
         mAdapter = new SectionAdapter(mContext, dataBeanList);
         viewMain.setLayoutManager(new GridLayoutManager(mContext, 2));
         viewMain.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new SectionAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(mContext, SectionActivity.class);
+                intent.putExtra(Constants.INTENT_ZHIHU_SECTION_ID, dataBeanList
+                    .get(position)
+                    .getId());
+                intent.putExtra(Constants.INTENT_ZHIHU_SECTION_TITLE, dataBeanList
+                    .get(position)
+                    .getName());
+                startActivity(intent);
+            }
+        });
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

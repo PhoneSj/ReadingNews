@@ -3,11 +3,14 @@ package com.phonesj.news.model.db;
 import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.ReadStateBean;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by Phone on 2017/7/14.
@@ -74,5 +77,13 @@ public class RealmHelper implements DBHelper {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<LikeBean> queryLikeAll() {
+        RealmResults<LikeBean> realmResults = mRealm
+            .where(LikeBean.class)
+            .findAllSorted("time", Sort.ASCENDING);
+        return mRealm.copyFromRealm(realmResults);
     }
 }

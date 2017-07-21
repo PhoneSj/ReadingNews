@@ -16,6 +16,21 @@ import android.widget.ImageView;
 
 public class ImageLoader {
 
+    public static void load(Context context, String url, int holdImg, int erroeImg, ImageView iv) {
+        if (!App.getAppComponent().getImplSPHelper().getNoImageState()) {
+            //crossFade() 图片显示、不显示启用渐变过程
+            //diskCacheStrategy(DiskCacheStrategy.SOURCE) 磁盘缓存策略：仅缓存原图，不缓存转换过的图片
+            Glide
+                .with(context)
+                .load(url)
+                .placeholder(holdImg)
+                .error(erroeImg)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(iv);
+        }
+    }
+
     public static void load(Context context, String url, ImageView iv) {
         if (!App.getAppComponent().getImplSPHelper().getNoImageState()) {
             //crossFade() 图片显示、不显示启用渐变过程
@@ -28,6 +43,7 @@ public class ImageLoader {
                 .into(iv);
         }
     }
+
 
     public static void load(Context context, String url, Transformation<Bitmap> transformation, ImageView iv) {
         if (!App.getAppComponent().getImplSPHelper().getNoImageState()) {

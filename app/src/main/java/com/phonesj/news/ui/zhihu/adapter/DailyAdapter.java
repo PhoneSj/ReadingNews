@@ -4,6 +4,7 @@ import com.phonesj.news.R;
 import com.phonesj.news.component.ImageLoader;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 import com.phonesj.news.widget.ZhihuDiffCallBack;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int contentItemLayoutId = R.layout.item_daily_content;
 
     private Context context;
-    private List<DailyBean.StoriesBean> storiesBeanList;
+    private List<StoriesBean> storiesBeanList;
     private List<DailyBean.TopStoriesBean> topStoriesBeanList;
 
     private ViewPager topViewPager;
@@ -53,7 +54,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ITEM_CONTENT    //内容
     }
 
-    public DailyAdapter(Context context, List<DailyBean.StoriesBean> storiesBeanList) {
+    public DailyAdapter(Context context, List<StoriesBean> storiesBeanList) {
         this.context = context;
         this.storiesBeanList = storiesBeanList;
     }

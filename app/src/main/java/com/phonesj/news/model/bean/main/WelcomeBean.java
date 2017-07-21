@@ -1,4 +1,4 @@
-package com.phonesj.news.model.bean;
+package com.phonesj.news.model.bean.main;
 
 /**
  * Created by Phone on 2017/7/17.

@@ -2,11 +2,12 @@ package com.phonesj.news.ui.zhihu.adapter;
 
 import com.phonesj.news.R;
 import com.phonesj.news.component.ImageLoader;
-import com.phonesj.news.model.bean.zhihu.SectionBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 
 import java.util.List;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,38 +18,40 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Phone on 2017/7/19.
+ * Created by Phone on 2017/7/21.
  */
 
-public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHolder> {
+public class SectionSubAdapter extends RecyclerView.Adapter<SectionSubAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<SectionBean.DataBean> datas;
+    private List<StoriesBean> datas;
     private OnItemClickListener onItemClickListener;
 
-    public SectionAdapter(Context mContext, List<SectionBean.DataBean> datas) {
+    public SectionSubAdapter(Context mContext, List<StoriesBean> datas) {
         this.mContext = mContext;
         this.datas = datas;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_section, parent, false);
+        View view = LayoutInflater
+            .from(mContext)
+            .inflate(R.layout.item_daily_content, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        // TODO: 2017/7/19
-        //        //Glide在加载GridView等时,由于ImageView和Bitmap实际大小不符合,第一次时加载可能会变形(我这里出现了放大),必须在加载前再次固定ImageView大小
-        //        ViewGroup.LayoutParams lp = holder.sectionBg.getLayoutParams();
-        //        lp.width = (App.SCREEN_WIDTH - SystemUtil.dp2px(mContext,12)) / 2;
-        //        lp.height = SystemUtil.dp2px(mContext,120);
-
-        ImageLoader.load(mContext, datas.get(position).getThumbnail(), holder.sectionBg);
-        holder.sectionKind.setText(datas.get(position).getName());
-        holder.sectionDes.setText(datas.get(position).getDescription());
-
+        List<String> imgs = datas.get(position).getImages();
+        if (imgs != null && imgs.size() > 0) {
+            ImageLoader.load(mContext, imgs.get(0), holder.ivDailyItemImage);
+        }
+        holder.tvDailyItemTitle.setText(datas.get(position).getTitle());
+        if (datas.get(position).getReadState()) {
+            holder.tvDailyItemTitle.setTextColor(ContextCompat.getColor(mContext, R.color.news_read));
+        } else {
+            holder.tvDailyItemTitle.setTextColor(ContextCompat.getColor(mContext, R.color.news_unread));
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,14 +67,16 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
         return datas == null ? 0 : datas.size();
     }
 
+    public void setReadState(int position, boolean state) {
+        datas.get(position).setReadState(state);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.section_bg)
-        ImageView sectionBg;
-        @BindView(R.id.section_kind)
-        TextView sectionKind;
-        @BindView(R.id.section_des)
-        TextView sectionDes;
+        @BindView(R.id.iv_daily_item_image)
+        ImageView ivDailyItemImage;
+        @BindView(R.id.tv_daily_item_title)
+        TextView tvDailyItemTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);

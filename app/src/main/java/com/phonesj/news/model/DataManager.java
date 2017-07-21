@@ -1,12 +1,13 @@
 package com.phonesj.news.model;
 
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
+import com.phonesj.news.model.bean.zhihu.SectionSubBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
@@ -14,6 +15,8 @@ import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.db.DBHelper;
 import com.phonesj.news.model.http.HttpHelper;
 import com.phonesj.news.model.sp.SPHelper;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 
@@ -89,6 +92,11 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public Flowable<SectionSubBean> fetchSectionSubInfo(int id) {
+        return mHttpHelper.fetchSectionSubInfo(id);
+    }
+
+    @Override
     public boolean getNightModeState() {
         return mSPHelper.getNightModeState();
     }
@@ -151,5 +159,10 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     @Override
     public boolean queryLikeId(String id) {
         return mDBHelper.queryLikeId(id);
+    }
+
+    @Override
+    public List<LikeBean> queryLikeAll() {
+        return mDBHelper.queryLikeAll();
     }
 }

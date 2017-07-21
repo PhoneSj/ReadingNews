@@ -3,7 +3,7 @@ package com.phonesj.news.presenter.main;
 import com.phonesj.news.base.RxPresenter;
 import com.phonesj.news.base.contract.main.WelcomeContract;
 import com.phonesj.news.model.DataManager;
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.util.RxUtil;
 
 import java.util.concurrent.TimeUnit;

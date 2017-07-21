@@ -2,11 +2,12 @@ package com.phonesj.news.ui.zhihu.adapter;
 
 import com.phonesj.news.R;
 import com.phonesj.news.component.ImageLoader;
-import com.phonesj.news.model.bean.zhihu.DailyBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 
 import java.util.List;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,11 @@ import butterknife.ButterKnife;
 public class ThemeSubAdapter extends RecyclerView.Adapter<ThemeSubAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<DailyBean.StoriesBean> datas;
+    private List<StoriesBean> datas;
 
     private OnItemClickListener onItemClickListener;
 
-    public ThemeSubAdapter(Context mContext, List<DailyBean.StoriesBean> datas) {
+    public ThemeSubAdapter(Context mContext, List<StoriesBean> datas) {
         this.mContext = mContext;
         this.datas = datas;
     }
@@ -47,6 +48,11 @@ public class ThemeSubAdapter extends RecyclerView.Adapter<ThemeSubAdapter.ViewHo
             ImageLoader.load(mContext, imgs.get(0), holder.ivDailyItemImage);
         }
         holder.tvDailyItemTitle.setText(datas.get(position).getTitle());
+        if (datas.get(position).getReadState()) {
+            holder.tvDailyItemTitle.setTextColor(ContextCompat.getColor(mContext, R.color.news_read));
+        } else {
+            holder.tvDailyItemTitle.setTextColor(ContextCompat.getColor(mContext, R.color.news_unread));
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

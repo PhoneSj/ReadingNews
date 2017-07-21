@@ -56,6 +56,9 @@ public class ThemeFragment extends RootFragment<ThemePresenter> implements Theme
                 intent.putExtra(Constants.INTENT_ZHIHU_THEME_ID, othersBeanList
                     .get(position)
                     .getId());
+                intent.putExtra(Constants.INTENT_ZHIHU_THEME_TITLE, othersBeanList
+                    .get(position)
+                    .getName());
                 startActivity(intent);
             }
         });

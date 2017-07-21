@@ -6,6 +6,7 @@ import com.phonesj.news.component.RxBus;
 import com.phonesj.news.model.DataManager;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 import com.phonesj.news.util.DateUtil;
 import com.phonesj.news.util.RxUtil;
 import com.phonesj.news.widget.CommonSubscriber;
@@ -96,8 +97,8 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
             .map(new Function<DailyBeforeBean, DailyBeforeBean>() {
                 @Override
                 public DailyBeforeBean apply(@NonNull DailyBeforeBean dailyBeforeBean) throws Exception {
-                    List<DailyBean.StoriesBean> list = dailyBeforeBean.getStories();
-                    for (DailyBean.StoriesBean bean : list) {
+                    List<StoriesBean> list = dailyBeforeBean.getStories();
+                    for (StoriesBean bean : list) {
                         bean.setReadState(mDataManager.queryNewsId(bean.getId()));
                     }
                     return dailyBeforeBean;
@@ -128,8 +129,8 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
             .map(new Function<DailyBean, DailyBean>() {
                 @Override
                 public DailyBean apply(@NonNull DailyBean dailyBean) throws Exception {
-                    List<DailyBean.StoriesBean> storiesBeanList = dailyBean.getStories();
-                    for (DailyBean.StoriesBean bean : storiesBeanList) {
+                    List<StoriesBean> storiesBeanList = dailyBean.getStories();
+                    for (StoriesBean bean : storiesBeanList) {
                         bean.setReadState(mDataManager.queryNewsId(bean.getId()));
                     }
                     return dailyBean;
@@ -152,8 +153,8 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
             .map(new Function<DailyBeforeBean, DailyBeforeBean>() {
                 @Override
                 public DailyBeforeBean apply(@NonNull DailyBeforeBean dailyBeforeBean) throws Exception {
-                    List<DailyBean.StoriesBean> storiesBeanList = dailyBeforeBean.getStories();
-                    for (DailyBean.StoriesBean bean : storiesBeanList) {
+                    List<StoriesBean> storiesBeanList = dailyBeforeBean.getStories();
+                    for (StoriesBean bean : storiesBeanList) {
                         bean.setReadState(mDataManager.queryNewsId(bean.getId()));
                     }
                     return dailyBeforeBean;

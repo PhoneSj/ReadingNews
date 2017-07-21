@@ -2,7 +2,7 @@ package com.phonesj.news.base.contract.main;
 
 import com.phonesj.news.base.BasePresenter;
 import com.phonesj.news.base.BaseView;
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 
 /**
  * Created by Phone on 2017/7/17.

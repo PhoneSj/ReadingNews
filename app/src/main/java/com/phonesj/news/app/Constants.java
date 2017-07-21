@@ -59,7 +59,13 @@ public class Constants {
 
     public static final String INTENT_ZHIHU_COMMONT_LONG_NUM = "zhihu_commont_long_num";
 
-    public static final String INTENT_ZHIHU_THEME_ID = "theme_id";
+    public static final String INTENT_ZHIHU_THEME_ID = "zhihu_theme_id";
+
+    public static final String INTENT_ZHIHU_THEME_TITLE = "zhihu_theme_title";
+
+    public static final String INTENT_ZHIHU_SECTION_ID = "zhihu_section_id";
+
+    public static final String INTENT_ZHIHU_SECTION_TITLE = "zhihu_section_title";
 
     //=======================bundle=========================
     public static final String BUNDLE_ZHIHU_COMMON_ID = "zhihu_common_id";

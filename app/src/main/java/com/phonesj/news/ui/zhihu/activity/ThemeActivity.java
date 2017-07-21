@@ -5,7 +5,7 @@ import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RootActivity;
 import com.phonesj.news.base.contract.zhihu.ThemeSubConstract;
 import com.phonesj.news.component.ImageLoader;
-import com.phonesj.news.model.bean.zhihu.DailyBean;
+import com.phonesj.news.model.bean.zhihu.StoriesBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.presenter.zhihu.ThemeSubPresenter;
 import com.phonesj.news.ui.zhihu.adapter.ThemeSubAdapter;
@@ -46,7 +46,7 @@ public class ThemeActivity extends RootActivity<ThemeSubPresenter> implements Th
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
 
-    private List<DailyBean.StoriesBean> datas = new ArrayList<>();
+    private List<StoriesBean> datas = new ArrayList<>();
     private ThemeSubAdapter mAdapter;
 
     @Override
@@ -68,6 +68,8 @@ public class ThemeActivity extends RootActivity<ThemeSubPresenter> implements Th
 
         Intent intent = getIntent();
         final int id = intent.getExtras().getInt(Constants.INTENT_ZHIHU_THEME_ID);
+        String title = intent.getExtras().getString(Constants.INTENT_ZHIHU_THEME_TITLE);
+        setToolbar(toolBar, title);
         mPresenter.getThemeSubData(id);
         stateLoading();
 
@@ -75,10 +77,12 @@ public class ThemeActivity extends RootActivity<ThemeSubPresenter> implements Th
         mAdapter.setOnItemClickListener(new ThemeSubAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int positon) {
-                // TODO: 2017/7/21
-                mPresenter.insertReadStateToDB(datas.get(positon).getId());
-                mAdapter.setReadState(positon,true);
-                mAdapter.notifyItemChanged(positon);
+                mPresenter.insertReadStateToDB(datas.get(positon).getId());//存储该消息的阅读状态
+                mAdapter.setReadState(positon, true);
+                mAdapter.notifyItemChanged(positon);//刷新指定item的ui
+                Intent intent2 = new Intent(mContext, ZhihuDetailActivity.class);
+                intent2.putExtra(Constants.INTENT_ZHIHU_DETAIL_ID, datas.get(positon).getId());
+                startActivity(intent2);
             }
         });
 

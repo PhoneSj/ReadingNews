@@ -1,11 +1,12 @@
 package com.phonesj.news.model.http;
 
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
+import com.phonesj.news.model.bean.zhihu.SectionSubBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
@@ -97,8 +98,17 @@ public interface HttpHelper {
 
     /**
      * 主体日报
+     *
      * @param id 主体日报id
      * @return
      */
     Flowable<ThemeSubBean> fetchThemeSubInfo(int id);
+
+    /**
+     * 专栏
+     *
+     * @param id 专栏id
+     * @return
+     */
+    Flowable<SectionSubBean> fetchSectionSubInfo(int id);
 }

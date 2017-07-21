@@ -5,7 +5,7 @@ import com.phonesj.news.R;
 import com.phonesj.news.base.BaseActivity;
 import com.phonesj.news.base.contract.main.WelcomeContract;
 import com.phonesj.news.component.ImageLoader;
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.presenter.main.WelcomePresenter;
 
 import android.content.Intent;

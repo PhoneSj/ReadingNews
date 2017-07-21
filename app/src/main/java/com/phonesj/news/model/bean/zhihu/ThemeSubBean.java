@@ -26,7 +26,7 @@ public class ThemeSubBean {
     private String name;
     private String image;
     private String image_source;
-    private List<DailyBean.StoriesBean> stories;
+    private List<StoriesBean> stories;
     private List<EditorsBean> editors;
 
     public String getDescription() {
@@ -77,11 +77,11 @@ public class ThemeSubBean {
         this.image_source = image_source;
     }
 
-    public List<DailyBean.StoriesBean> getStories() {
+    public List<StoriesBean> getStories() {
         return stories;
     }
 
-    public void setStories(List<DailyBean.StoriesBean> stories) {
+    public void setStories(List<StoriesBean> stories) {
         this.stories = stories;
     }
 
@@ -92,61 +92,6 @@ public class ThemeSubBean {
     public void setEditors(List<EditorsBean> editors) {
         this.editors = editors;
     }
-
-//    public static class StoriesBean {
-    //        /**
-    //         * type : 0
-    //         * id : 7483384
-    //         * title : 更多日常心理学，都在读读日报里
-    //         * images : ["http://pic1.zhimg.com/56d1d1202077c7b5b0e48e3b7d3ebb60_t.jpg"]
-    //         */
-    //
-    //        private int type;
-    //        private int id;
-    //        private String title;
-    //        private List<String> images;
-    //        private boolean readState;
-    //
-    //        public int getType() {
-    //            return type;
-    //        }
-    //
-    //        public void setType(int type) {
-    //            this.type = type;
-    //        }
-    //
-    //        public int getId() {
-    //            return id;
-    //        }
-    //
-    //        public void setId(int id) {
-    //            this.id = id;
-    //        }
-    //
-    //        public String getTitle() {
-    //            return title;
-    //        }
-    //
-    //        public void setTitle(String title) {
-    //            this.title = title;
-    //        }
-    //
-    //        public List<String> getImages() {
-    //            return images;
-    //        }
-    //
-    //        public void setImages(List<String> images) {
-    //            this.images = images;
-    //        }
-    //
-    //        public boolean isReadState() {
-    //            return readState;
-    //        }
-    //
-    //        public void setReadState(boolean readState) {
-    //            this.readState = readState;
-    //        }
-    //    }
 
     public static class EditorsBean {
         /**

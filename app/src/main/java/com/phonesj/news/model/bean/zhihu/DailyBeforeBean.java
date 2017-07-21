@@ -14,7 +14,7 @@ public class DailyBeforeBean {
      */
 
     private String date;
-    private List<DailyBean.StoriesBean> stories;
+    private List<StoriesBean> stories;
 
     public String getDate() {
         return date;
@@ -24,11 +24,11 @@ public class DailyBeforeBean {
         this.date = date;
     }
 
-    public List<DailyBean.StoriesBean> getStories() {
+    public List<StoriesBean> getStories() {
         return stories;
     }
 
-    public void setStories(List<DailyBean.StoriesBean> stories) {
+    public void setStories(List<StoriesBean> stories) {
         this.stories = stories;
     }
 }

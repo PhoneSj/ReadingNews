@@ -1,11 +1,12 @@
 package com.phonesj.news.model.http.api;
 
-import com.phonesj.news.model.bean.WelcomeBean;
+import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
+import com.phonesj.news.model.bean.zhihu.SectionSubBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
@@ -55,4 +56,7 @@ public interface ZhihuApis {
 
     @GET("theme/{id}")
     Flowable<ThemeSubBean> getThemeSubInfo(@Path("id") int id);
+
+    @GET("section/{id}")
+    Flowable<SectionSubBean> getSectionSubInfo(@Path("id") int id);
 }
