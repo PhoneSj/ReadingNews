@@ -33,7 +33,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"/>
         <activity
+            android:name=".ui.zhihu.activity.CalenderActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.zhihu.activity.ZhihuDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.zhihu.activity.CommentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.zhihu.activity.ThemeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
     </application>

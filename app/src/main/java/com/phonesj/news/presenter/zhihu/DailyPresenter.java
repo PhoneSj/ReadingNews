@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import android.util.Log;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -56,7 +55,6 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
      * 注册RxBus监听事件
      */
     private void registerEvent() {
-        // TODO: 2017/7/18 监听CalenderDate
         addSubscribe(RxBus
             .getDefault()
             .toFlowable(CalendarDay.class)
@@ -66,8 +64,8 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
                 public String apply(@NonNull CalendarDay calendarDay) throws Exception {
                     StringBuilder sb = new StringBuilder();
                     String year = String.valueOf(calendarDay.getYear());
-                    String month = String.valueOf(calendarDay.getMonth());
-                    String day = String.valueOf(calendarDay.getDate());
+                    String month = String.valueOf(calendarDay.getMonth() + 1);
+                    String day = String.valueOf(calendarDay.getDay() + 1);
                     if (month.length() < 2) {
                         month = "0" + month;
                     }
@@ -174,7 +172,6 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
 
     @Override
     public void startInterval() {
-        Log.w("phone", "startInterval");
         if (intervalSubscription != null && !intervalSubscription.isDisposed()) {
             //轮播图正在运行
             return;
@@ -186,7 +183,6 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
             .subscribe(new Consumer<Long>() {
                 @Override
                 public void accept(@NonNull Long aLong) throws Exception {
-                    Log.i("phone", "accept");
                     if (currentTopCount == topCount) {
                         currentTopCount = 0;
                     }
@@ -198,7 +194,6 @@ public class DailyPresenter extends RxPresenter<DailyConstract.View> implements 
 
     @Override
     public void stopInterval() {
-        Log.w("phone", "stopInterval");
         //停止轮播图运行
         if (intervalSubscription != null && !intervalSubscription.isDisposed()) {
             intervalSubscription.dispose();

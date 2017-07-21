@@ -7,6 +7,7 @@ import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
+import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 
@@ -51,4 +52,7 @@ public interface ZhihuApis {
 
     @GET("story/{id}/long-comments")
     Flowable<CommonBean> getLongCommonInfo(@Path("id") int id);
+
+    @GET("theme/{id}")
+    Flowable<ThemeSubBean> getThemeSubInfo(@Path("id") int id);
 }

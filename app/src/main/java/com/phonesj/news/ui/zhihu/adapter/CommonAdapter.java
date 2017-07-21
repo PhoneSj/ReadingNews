@@ -49,7 +49,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.ViewHolder
         holder.tvCommentName.setText(datas.get(position).getAuthor());
         holder.tvCommentContent.setText(datas.get(position).getContent());
         holder.tvCommentTime.setText(DateUtil.formatTime2String(datas.get(position).getTime()));
-        holder.tvCommentLike.setText(datas.get(position).getLikes());
+        holder.tvCommentLike.setText(String.valueOf(datas.get(position).getLikes()));
 
         final CommonBean.CommentsBean.ReplyToBean replyToBean = datas.get(position).getReply_to();
         if (replyToBean != null && replyToBean.getId() != 0) {
@@ -92,6 +92,9 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.ViewHolder
                 holder.tvCommentExpand.setOnClickListener(new OnStateClickListener(replyToBean, holder.tvCommentReply));
                 holder.tvCommentReply.setMaxLines(MAX_LINE);
             }
+        } else {
+            holder.tvCommentReply.setVisibility(View.GONE);
+            holder.tvCommentExpand.setVisibility(View.GONE);
         }
     }
 

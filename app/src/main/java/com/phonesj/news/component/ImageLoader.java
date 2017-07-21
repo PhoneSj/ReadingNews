@@ -1,10 +1,12 @@
 package com.phonesj.news.component;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.phonesj.news.app.App;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 /**
@@ -24,6 +26,12 @@ public class ImageLoader {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(iv);
+        }
+    }
+
+    public static void load(Context context, String url, Transformation<Bitmap> transformation, ImageView iv) {
+        if (!App.getAppComponent().getImplSPHelper().getNoImageState()) {
+            Glide.with(context).load(url).bitmapTransform(transformation).into(iv);
         }
     }
 }

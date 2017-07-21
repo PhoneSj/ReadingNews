@@ -10,13 +10,13 @@ import com.phonesj.news.model.bean.zhihu.ThemeBean;
 
 public interface ThemeConstract {
 
-    interface View extends BaseView{
+    interface View extends BaseView {
 
         void showContent(ThemeBean info);
 
     }
 
-    interface Presenter extends BasePresenter<View>{
+    interface Presenter extends BasePresenter<View> {
 
         void getThemeData();
 

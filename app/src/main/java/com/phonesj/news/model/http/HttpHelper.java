@@ -7,6 +7,7 @@ import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
+import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 
@@ -93,4 +94,11 @@ public interface HttpHelper {
      * @return
      */
     Flowable<CommonBean> fetchLongCommonInfo(int id);
+
+    /**
+     * 主体日报
+     * @param id 主体日报id
+     * @return
+     */
+    Flowable<ThemeSubBean> fetchThemeSubInfo(int id);
 }

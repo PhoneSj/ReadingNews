@@ -1,15 +1,18 @@
 package com.phonesj.news.ui.zhihu.fragment;
 
 import com.phonesj.news.R;
+import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RootFragment;
 import com.phonesj.news.base.contract.zhihu.ThemeConstract;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.presenter.zhihu.ThemePresenter;
+import com.phonesj.news.ui.zhihu.activity.ThemeActivity;
 import com.phonesj.news.ui.zhihu.adapter.ThemeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +52,11 @@ public class ThemeFragment extends RootFragment<ThemePresenter> implements Theme
             @Override
             public void onItemClick(int position) {
                 // TODO: 2017/7/19 页面跳转
+                Intent intent = new Intent(mContext, ThemeActivity.class);
+                intent.putExtra(Constants.INTENT_ZHIHU_THEME_ID, othersBeanList
+                    .get(position)
+                    .getId());
+                startActivity(intent);
             }
         });
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

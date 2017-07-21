@@ -9,6 +9,7 @@ import com.phonesj.news.component.RxBus;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.presenter.zhihu.DailyPresenter;
+import com.phonesj.news.ui.zhihu.activity.CalenderActivity;
 import com.phonesj.news.ui.zhihu.activity.ZhihuDetailActivity;
 import com.phonesj.news.ui.zhihu.adapter.DailyAdapter;
 import com.phonesj.news.util.DateUtil;
@@ -76,7 +77,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
                     mAdapter.notifyItemChanged(position + 2);
                 }
                 //页面跳转
-                // TODO: 2017/7/19
                 int id = storiesBeanList.get(position).getId();
                 Intent intent = new Intent(mContext, ZhihuDetailActivity.class);
                 intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_ID, id);
@@ -160,5 +160,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
     @OnClick(R.id.fab_calender)
     public void onViewClicked() {
         // TODO: 2017/7/19 跳转到日历选择页面
+        Intent intent = new Intent(mContext, CalenderActivity.class);
+        startActivity(intent);
     }
 }

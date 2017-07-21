@@ -7,6 +7,7 @@ import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
 import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
+import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.http.api.ZhihuApis;
@@ -76,6 +77,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<CommonBean> fetchLongCommonInfo(int id) {
         return zhihuApis.getLongCommonInfo(id);
+    }
+
+    @Override
+    public Flowable<ThemeSubBean> fetchThemeSubInfo(int id) {
+        return zhihuApis.getThemeSubInfo(id);
     }
 
 }

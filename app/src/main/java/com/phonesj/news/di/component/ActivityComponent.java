@@ -4,6 +4,7 @@ import com.phonesj.news.di.module.ActivityModule;
 import com.phonesj.news.di.scope.ActivityScope;
 import com.phonesj.news.ui.main.activity.MainActivity;
 import com.phonesj.news.ui.main.activity.WelcomeActivity;
+import com.phonesj.news.ui.zhihu.activity.ThemeActivity;
 import com.phonesj.news.ui.zhihu.activity.ZhihuDetailActivity;
 
 import dagger.Component;
@@ -28,4 +29,6 @@ public interface ActivityComponent {
 
 
     void inject(ZhihuDetailActivity zhihuDetailActivity);
+
+    void inject(ThemeActivity themeActivity);
 }

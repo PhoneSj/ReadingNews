@@ -8,6 +8,7 @@ import com.phonesj.news.model.bean.zhihu.HotBean;
 import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.SectionBean;
 import com.phonesj.news.model.bean.zhihu.ThemeBean;
+import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.db.DBHelper;
@@ -80,6 +81,11 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     @Override
     public Flowable<CommonBean> fetchLongCommonInfo(int id) {
         return mHttpHelper.fetchLongCommonInfo(id);
+    }
+
+    @Override
+    public Flowable<ThemeSubBean> fetchThemeSubInfo(int id) {
+        return mHttpHelper.fetchThemeSubInfo(id);
     }
 
     @Override
