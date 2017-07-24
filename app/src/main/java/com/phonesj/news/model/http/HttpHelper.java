@@ -1,5 +1,6 @@
 package com.phonesj.news.model.http;
 
+import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
@@ -111,4 +112,11 @@ public interface HttpHelper {
      * @return
      */
     Flowable<SectionSubBean> fetchSectionSubInfo(int id);
+
+    /**
+     * 获取该应用的最新版本
+     *
+     * @return
+     */
+    Flowable<VersionBean> fetchVersionInfo();
 }

@@ -25,7 +25,12 @@ public class LikePresenter extends RxPresenter<LikeContract.View> implements Lik
     }
 
     @Override
-    public void deleteLikeData() {
+    public void deleteLikeData(String id) {
+        mDataManager.deleteLikeBean(id);
+    }
 
+    @Override
+    public void changeLikeTime(String id, long time, boolean isPlus) {
+        mDataManager.changeLikeTime(id, time, isPlus);
     }
 }

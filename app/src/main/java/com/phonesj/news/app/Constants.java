@@ -1,5 +1,9 @@
 package com.phonesj.news.app;
 
+import java.io.File;
+
+import android.os.Environment;
+
 /**
  * Created by Phone on 2017/7/14.
  * <p>维持常量的类</p>
@@ -36,6 +40,19 @@ public class Constants {
     public static final int ZHIHU_COMMON_TYPE_SHORT = 201;
 
     public static final int ZHIHU_COMMON_TYPE_LONG = 202;
+
+    //================= PATH ====================
+
+    public static final String PATH_DATA = App
+        .getInstance()
+        .getCacheDir()
+        .getAbsolutePath() + File.separator + "data";
+
+    public static final String PATH_CACHE = PATH_DATA + "/NetCache";
+
+    public static final String PATH_SDCARD = Environment
+        .getExternalStorageDirectory()
+        .getAbsolutePath() + File.separator + "codeest" + File.separator + "GeekNews";
 
     //========================sp=======================
     public static final String SP_NIGHT_MODE = "night_mode";

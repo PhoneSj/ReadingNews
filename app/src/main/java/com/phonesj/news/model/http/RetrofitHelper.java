@@ -1,5 +1,6 @@
 package com.phonesj.news.model.http;
 
+import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
@@ -11,6 +12,7 @@ import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
+import com.phonesj.news.model.http.api.MyApi;
 import com.phonesj.news.model.http.api.ZhihuApis;
 
 import javax.inject.Inject;
@@ -23,10 +25,12 @@ import io.reactivex.Flowable;
 
 public class RetrofitHelper implements HttpHelper {
 
+    private MyApi myApi;
     private ZhihuApis zhihuApis;
 
     @Inject
-    public RetrofitHelper(ZhihuApis zhihuApis) {
+    public RetrofitHelper(MyApi myApi, ZhihuApis zhihuApis) {
+        this.myApi = myApi;
         this.zhihuApis = zhihuApis;
     }
 
@@ -88,6 +92,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<SectionSubBean> fetchSectionSubInfo(int id) {
         return zhihuApis.getSectionSubInfo(id);
+    }
+
+    @Override
+    public Flowable<VersionBean> fetchVersionInfo() {
+        return myApi.getVersionInfo();
     }
 
 }

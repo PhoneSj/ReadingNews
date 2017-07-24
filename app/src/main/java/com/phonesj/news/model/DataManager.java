@@ -1,5 +1,6 @@
 package com.phonesj.news.model;
 
+import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
@@ -97,6 +98,11 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public Flowable<VersionBean> fetchVersionInfo() {
+        return mHttpHelper.fetchVersionInfo();
+    }
+
+    @Override
     public boolean getNightModeState() {
         return mSPHelper.getNightModeState();
     }
@@ -164,5 +170,10 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     @Override
     public List<LikeBean> queryLikeAll() {
         return mDBHelper.queryLikeAll();
+    }
+
+    @Override
+    public void changeLikeTime(String id, long time, boolean isPlus) {
+        mDBHelper.changeLikeTime(id, time, isPlus);
     }
 }

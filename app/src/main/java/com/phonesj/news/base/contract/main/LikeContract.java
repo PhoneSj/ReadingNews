@@ -19,6 +19,8 @@ public interface LikeContract {
 
         void getLikeData();
 
-        void deleteLikeData();
+        void deleteLikeData(String id);
+
+        void changeLikeTime(String id, long time, boolean isPlus);
     }
 }

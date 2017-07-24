@@ -1,12 +1,15 @@
 package com.phonesj.news.ui.zhihu.adapter;
 
 import com.phonesj.news.R;
+import com.phonesj.news.app.Constants;
 import com.phonesj.news.component.ImageLoader;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
+import com.phonesj.news.ui.zhihu.activity.ZhihuDetailActivity;
 
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,13 +54,12 @@ public class DailyTopAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 2017/7/18
-                //                Intent intent = new Intent(context, ZhihuDetailActivity.class);
-                //                //传递该news的id过去
-                //                int id = topStoriesBeanList.get(position).getId();
-                //                intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_ID, id);
-                //                intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_TRANSITION, true);
-                //                context.startActivity(intent);
+                Intent intent = new Intent(context, ZhihuDetailActivity.class);
+                //传递该news的id过去
+                int id = topStoriesBeanList.get(position).getId();
+                intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_ID, id);
+                intent.putExtra(Constants.INTENT_ZHIHU_DETAIL_TRANSITION, true);
+                context.startActivity(intent);
             }
         });
         container.addView(view);

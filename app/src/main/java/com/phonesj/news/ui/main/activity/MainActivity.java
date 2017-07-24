@@ -15,6 +15,7 @@ import com.phonesj.news.ui.main.fragment.SettingFragment;
 import com.phonesj.news.ui.vtex.fragment.VtexMainFragment;
 import com.phonesj.news.ui.wechat.fragment.WechatMainFragment;
 import com.phonesj.news.ui.zhihu.fragment.ZhihuMainFragment;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -107,7 +108,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_zhihu);
-        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mLikeFragment, mSettingFragment);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -235,6 +236,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_about;
         }
         return R.id.drawer_zhihu;
+    }
+
+    public void checkPermissions() {
+        mPresenter.checkPermissions(new RxPermissions(this));
     }
 
 }

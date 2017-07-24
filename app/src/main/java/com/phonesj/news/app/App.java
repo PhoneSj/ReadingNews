@@ -46,9 +46,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //TODO 初始化屏幕宽高
+        //初始化屏幕宽高
         getScreenSize();
-        //TODO 初始化数据库
+        //初始化数据库
         Realm.init(getApplicationContext());
         //TODO 其他初始化在子线程中完成
     }

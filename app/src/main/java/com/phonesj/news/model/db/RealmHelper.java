@@ -86,4 +86,16 @@ public class RealmHelper implements DBHelper {
             .findAllSorted("time", Sort.ASCENDING);
         return mRealm.copyFromRealm(realmResults);
     }
+
+    @Override
+    public void changeLikeTime(String id, long time, boolean isPlus) {
+        LikeBean bean = mRealm.where(LikeBean.class).equalTo("id", id).findFirst();
+        mRealm.beginTransaction();
+        if (isPlus) {
+            bean.setTime(++time);
+        } else {
+            bean.setTime(--time);
+        }
+        mRealm.commitTransaction();
+    }
 }
