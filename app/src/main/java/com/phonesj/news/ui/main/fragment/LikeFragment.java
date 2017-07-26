@@ -15,7 +15,6 @@ import java.util.List;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import butterknife.BindView;
 
 /**
@@ -48,7 +47,6 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
         DefaultItemTouchHelperCallback itemTouchHelperCallback = new DefaultItemTouchHelperCallback(new DefaultItemTouchHelperCallback.OnItemTouchCallbackListener() {
             @Override
             public boolean onMove(int srcPosition, int targetPosition) {
-                Log.w("phone", "src:" + srcPosition + "  tar:" + targetPosition);
                 if (datas != null) {
                     mPresenter.changeLikeTime(datas.get(srcPosition).getId(), datas
                         .get(targetPosition)
@@ -79,7 +77,6 @@ public class LikeFragment extends BaseFragment<LikePresenter> implements LikeCon
 
     @Override
     public void showContent(List<LikeBean> info) {
-        Log.w("phone", "showContent");
         datas.clear();
         datas.addAll(info);
         mAdapter.notifyDataSetChanged();

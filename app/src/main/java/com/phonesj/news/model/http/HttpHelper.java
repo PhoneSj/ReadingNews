@@ -1,5 +1,7 @@
 package com.phonesj.news.model.http;
 
+import com.phonesj.news.model.bean.gank.GankItemBean;
+import com.phonesj.news.model.bean.gank.GankSearchBean;
 import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
@@ -12,6 +14,9 @@ import com.phonesj.news.model.bean.zhihu.ThemeBean;
 import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
+import com.phonesj.news.model.http.response.GankHttpResponse;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 
@@ -119,4 +124,12 @@ public interface HttpHelper {
      * @return
      */
     Flowable<VersionBean> fetchVersionInfo();
+
+    Flowable<GankHttpResponse<List<GankItemBean>>> fetchTechList(String tech, int num, int page);
+
+    Flowable<GankHttpResponse<List<GankItemBean>>> fetchGrilList(int num, int page);
+
+    Flowable<GankHttpResponse<List<GankItemBean>>> fetchRandomGril(int num);
+
+    Flowable<GankHttpResponse<List<GankSearchBean>>> fetchGankSearchList(String query, String type, int count, int page);
 }

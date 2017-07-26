@@ -10,6 +10,7 @@ import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.event.NightModeEvent;
 import com.phonesj.news.presenter.main.SettingPresenter;
 import com.phonesj.news.ui.main.activity.MainActivity;
+import com.phonesj.news.util.LogUtil;
 import com.phonesj.news.util.ShareUtil;
 
 import java.io.File;
@@ -18,6 +19,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -53,7 +56,14 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
 
     private File cacheFile;
     private String versionName;
+    private boolean isNull = true;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtil.w("phone", "f  onCreate");
+        isNull = savedInstanceState == null;
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected void initInject() {
@@ -70,6 +80,7 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
         cbSettingCache.setChecked(mPresenter.getAutoCacheState());
         cbSettingImage.setChecked(mPresenter.getNoImageState());
         cbSettingNight.setChecked(mPresenter.getNightModeState());
+        LogUtil.w("f  nightState:" + mPresenter.getNightModeState());
         cbSettingCache.setOnCheckedChangeListener(this);
         cbSettingImage.setOnCheckedChangeListener(this);
         cbSettingNight.setOnCheckedChangeListener(this);
@@ -93,18 +104,22 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
         switch (compoundButton.getId()) {
             case R.id.cb_setting_cache:
                 mPresenter.setAutoCacheState(b);
-                NightModeEvent event = new NightModeEvent();
-                event.setNightMode(b);
-                RxBus.getDefault().post(event);//发送事件到RxBus中，在MainPresenter中注册了该事件
                 break;
             case R.id.cb_setting_image:
                 mPresenter.setNoImageState(b);
                 break;
             case R.id.cb_setting_night:
-                mPresenter.setNightModeState(b);
+                if (isNull) {   //防止夜间模式MainActivity执行reCreate后重复调用
+                    mPresenter.setNightModeState(b);
+                    NightModeEvent event = new NightModeEvent();
+                    event.setNightMode(b);
+                    RxBus.getDefault().post(event);//发送事件到RxBus中，在MainPresenter中注册了该事件
+                    LogUtil.w("f  post");
+                }
                 break;
         }
     }
+
 
     @OnClick({R.id.ll_setting_feedback, R.id.ll_setting_clear, R.id.ll_setting_update})
     public void onViewClicked(View view) {

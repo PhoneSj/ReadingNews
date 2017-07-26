@@ -21,7 +21,7 @@ public class Constants {
 
     public static final int TYPE_WEB = 104;
 
-    public static final int TYPE_GIRL = 105;
+    public static final int TYPE_WELFARE = 105;
 
     public static final int TYPE_WECHAT = 106;
 
@@ -84,9 +84,14 @@ public class Constants {
 
     public static final String INTENT_ZHIHU_SECTION_TITLE = "zhihu_section_title";
 
+    public static final String INTENT_GANK_TITLE = "gank_title";
+
+    public static final String INTENT_GANK_TYPE_CODE = "gank_type_code";
+
     //=======================bundle=========================
     public static final String BUNDLE_ZHIHU_COMMON_ID = "zhihu_common_id";
 
     public static final String BUNDLE_ZHIHU_COMMON_KIND = "zhihu_common_kind";
+
 
 }

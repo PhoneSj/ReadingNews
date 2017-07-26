@@ -53,6 +53,7 @@ ext {
             "annotation"                 : "org.glassfish:javax.annotation:10.0-b28",
 
             //other
+            "logger"                    : "com.orhanobut:logger:1.15",
             "fragmentation"              : "me.yokeyword:fragmentation:0.10.4"
     ]
 }

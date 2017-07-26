@@ -1,5 +1,7 @@
 package com.phonesj.news.model;
 
+import com.phonesj.news.model.bean.gank.GankItemBean;
+import com.phonesj.news.model.bean.gank.GankSearchBean;
 import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
@@ -15,6 +17,7 @@ import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.db.DBHelper;
 import com.phonesj.news.model.http.HttpHelper;
+import com.phonesj.news.model.http.response.GankHttpResponse;
 import com.phonesj.news.model.sp.SPHelper;
 
 import java.util.List;
@@ -103,6 +106,26 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public Flowable<GankHttpResponse<List<GankItemBean>>> fetchTechList(String tech, int num, int page) {
+        return mHttpHelper.fetchTechList(tech, num, page);
+    }
+
+    @Override
+    public Flowable<GankHttpResponse<List<GankItemBean>>> fetchGrilList(int num, int page) {
+        return mHttpHelper.fetchGrilList(num, page);
+    }
+
+    @Override
+    public Flowable<GankHttpResponse<List<GankItemBean>>> fetchRandomGril(int num) {
+        return mHttpHelper.fetchRandomGril(num);
+    }
+
+    @Override
+    public Flowable<GankHttpResponse<List<GankSearchBean>>> fetchGankSearchList(String query, String type, int count, int page) {
+        return mHttpHelper.fetchGankSearchList(query, type, count, page);
+    }
+
+    @Override
     public boolean getNightModeState() {
         return mSPHelper.getNightModeState();
     }
@@ -139,7 +162,7 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
 
     @Override
     public void setCurrentItem(int item) {
-        mSPHelper.getCurrentItem();
+        mSPHelper.setCurrentItem(item);
     }
 
     @Override

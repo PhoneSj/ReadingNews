@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import android.util.Log;
 import io.reactivex.Flowable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -33,7 +32,6 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
 
     @Override
     public void getWelcomeData() {
-        // TODO: 2017/7/17 从网络上获取数据
         addSubscribe(dataManager
             .fetchWelcomeInfo(RES)
             .compose(RxUtil.<WelcomeBean>rxSchedulerHelper())
@@ -41,7 +39,6 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
                 @Override
                 public void accept(@NonNull WelcomeBean welcomeBean) throws Exception {
                     //网络响应成功，显示数据
-                    Log.w("phone", "success");
                     mView.showContent(welcomeBean);
                     startCountDown();
                 }
@@ -50,7 +47,6 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
                 @Override
                 public void accept(@NonNull Throwable throwable) throws Exception {
                     //网络响应失败，直接跳转页面
-                    Log.w("phone", "fail");
                     mView.jumpToMain();
                 }
             }));

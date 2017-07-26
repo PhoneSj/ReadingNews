@@ -4,8 +4,12 @@ import com.phonesj.news.app.App;
 import com.phonesj.news.di.component.ActivityComponent;
 import com.phonesj.news.di.component.DaggerActivityComponent;
 import com.phonesj.news.di.module.ActivityModule;
+import com.phonesj.news.util.SnackbarUtil;
 
 import javax.inject.Inject;
+
+import android.support.v7.app.AppCompatDelegate;
+import android.view.ViewGroup;
 
 /**
  * Created by Phone on 2017/7/14.
@@ -55,12 +59,18 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
 
     @Override
     public void showErrorMsg(String msg) {
-
+        SnackbarUtil.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), msg);
     }
 
     @Override
-    public void useNightMode(boolean isUse) {
-
+    public void useNightMode(boolean isNight) {
+        if (isNight) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        //重新创建该Activity
+        recreate();
     }
 
     @Override

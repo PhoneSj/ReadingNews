@@ -15,6 +15,7 @@ import com.phonesj.news.ui.main.fragment.SettingFragment;
 import com.phonesj.news.ui.vtex.fragment.VtexMainFragment;
 import com.phonesj.news.ui.wechat.fragment.WechatMainFragment;
 import com.phonesj.news.ui.zhihu.fragment.ZhihuMainFragment;
+import com.phonesj.news.util.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import android.content.DialogInterface;
@@ -27,7 +28,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -38,10 +38,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     Toolbar mToolBar;
     @BindView(R.id.view_search)
     MaterialSearchView mSearchView;
-    @BindView(R.id.toolbar_container)
-    FrameLayout toolbarContainer;
-    @BindView(R.id.fl_main_content)
-    FrameLayout mMainContent;
+    //    @BindView(R.id.toolbar_container)
+    //    FrameLayout toolbarContainer;
+    //    @BindView(R.id.fl_main_content)
+    //    FrameLayout mMainContent;
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
     @BindView(R.id.drawer)
@@ -63,13 +63,21 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private int hideFragment = Constants.TYPE_ZHIHU;
     private int showFragment = Constants.TYPE_ZHIHU;
 
+
+    /**
+     * 由于recreate 需要特殊处理夜间模式
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogUtil.w("phone", "a  onCreate");
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             mPresenter.setNightModeState(false);
         } else {
             showFragment = mPresenter.getCurrentItem();//从sp中获得上次选中项
+            LogUtil.w("a  showFragment:" + showFragment);
             hideFragment = Constants.TYPE_ZHIHU;
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
             mNavigationView.getMenu().findItem(R.id.drawer_zhihu).setChecked(false);
@@ -80,6 +88,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             hideFragment = showFragment;
         }
     }
+
 
     @Override
     protected int getLayout() {
@@ -93,6 +102,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
+        LogUtil.w("a  initEventAndData");
         setToolbar(mToolBar, "知乎日报");
         mZhihuMainFragment = new ZhihuMainFragment();
         mWechatMainFragment = new WechatMainFragment();
@@ -108,7 +118,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_zhihu);
-        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mLikeFragment, mSettingFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mWechatMainFragment, mGankMainFragment, mGoldMainFragment, mVtexMainFragment, mLikeFragment, mSettingFragment, mAboutFragment);
+        //        List<Fragment> list = getSupportFragmentManager().getFragments();
+        //        Log.w("phone", "size:" + (list == null ? 0 : list.size()));
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -150,13 +162,28 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     mLastMenuItem.setChecked(false);
                 }
                 mLastMenuItem = item;
-                mPresenter.setCurrentItem(showFragment);//保存当前选中的到sp中
+                mPresenter.setCurrentItem(showFragment);
                 item.setChecked(true);
                 mToolBar.setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
                 hideFragment = showFragment;
                 return true;
+            }
+        });
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (showFragment == Constants.TYPE_GANK) {
+                    mGankMainFragment.doSearch(query);
+                }
+                // TODO: 2017/7/26
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
     }

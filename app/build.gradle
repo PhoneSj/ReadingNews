@@ -12,6 +12,10 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "zh"
+        multiDexEnabled true
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -62,5 +66,6 @@ dependencies {
     provided rootProject.ext.dependencies["annotation"]
 
     //other
+    compile rootProject.ext.dependencies["logger"]
     compile rootProject.ext.dependencies["fragmentation"]
 }

@@ -24,7 +24,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -146,7 +145,6 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
 
     @Override
     public void doInterval(int currentCount) {
-        Log.w("phone", "doInterval");
         mAdapter.changeTopPage(currentCount);
     }
 

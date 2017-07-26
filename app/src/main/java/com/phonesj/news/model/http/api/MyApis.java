@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  * Created by Phone on 2017/7/24.
  */
 
-public interface MyApi {
+public interface MyApis {
 
     String HOST = "http://news-at.zhihu.com/api/4/";
 

@@ -2,6 +2,8 @@ package com.phonesj.news.di.component;
 
 import com.phonesj.news.di.module.FragmentModule;
 import com.phonesj.news.di.scope.FragmentScope;
+import com.phonesj.news.ui.gank.fragment.TechFragment;
+import com.phonesj.news.ui.gank.fragment.WelfareFragment;
 import com.phonesj.news.ui.main.fragment.LikeFragment;
 import com.phonesj.news.ui.main.fragment.SettingFragment;
 import com.phonesj.news.ui.zhihu.fragment.CommonFragment;
@@ -33,5 +35,9 @@ public interface FragmentComponent {
     void inject(LikeFragment likeFragment);
 
     void inject(SettingFragment settingFragment);
+
+    void inject(TechFragment techFragment);
+
+    void inject(WelfareFragment welfareFragment);
 
 }

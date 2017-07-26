@@ -2,9 +2,11 @@ package com.phonesj.news.di.module;
 
 import com.phonesj.news.BuildConfig;
 import com.phonesj.news.app.Constants;
+import com.phonesj.news.di.qualifier.GankUrl;
 import com.phonesj.news.di.qualifier.MyUrl;
 import com.phonesj.news.di.qualifier.ZhihuUrl;
-import com.phonesj.news.model.http.api.MyApi;
+import com.phonesj.news.model.http.api.GankApis;
+import com.phonesj.news.model.http.api.MyApis;
 import com.phonesj.news.model.http.api.ZhihuApis;
 import com.phonesj.news.util.SystemUtil;
 
@@ -43,8 +45,14 @@ public class HttpModule {
 
     @Provides
     @Singleton
-    MyApi getMyApis(@MyUrl Retrofit retrofit) {
-        return retrofit.create(MyApi.class);
+    MyApis getMyApis(@MyUrl Retrofit retrofit) {
+        return retrofit.create(MyApis.class);
+    }
+
+    @Provides
+    @Singleton
+    GankApis getGankApis(@GankUrl Retrofit retrofit) {
+        return retrofit.create(GankApis.class);
     }
 
     @Provides
@@ -58,7 +66,14 @@ public class HttpModule {
     @Singleton
     @MyUrl
     Retrofit getMyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, MyApi.HOST);
+        return createRetrofit(builder, client, MyApis.HOST);
+    }
+
+    @Provides
+    @Singleton
+    @GankUrl
+    Retrofit getGankRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, GankApis.HOST);
     }
 
     @Provides
@@ -77,6 +92,7 @@ public class HttpModule {
         }
         File cacheFile = new File(Constants.PATH_CACHE);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);//缓存大小50MB
+        //自定义拦截器
         Interceptor cacheInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
