@@ -37,6 +37,11 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return Math.round((float) App.SCREEN_WIDTH / (float) datas.get(position).getHeight() * 10f);
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_welfare, parent, false);
         return new ViewHolder(view);
@@ -44,24 +49,30 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        //        ImageLoader.load(mContext, datas.get(position).getUrl(), holder.ivGirl);
+        //该item不是首次加载，即ImgeView高度已经确定
+        if (datas.get(holder.getAdapterPosition()).getHeight() > 0) {
+            ViewGroup.LayoutParams lp = holder.ivGirl.getLayoutParams();
+            lp.height = datas.get(holder.getAdapterPosition()).getHeight();
+        }
 
         Glide
             .with(mContext)
             .load(datas.get(position).getUrl())
             .asBitmap()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(new SimpleTarget<Bitmap>() {
+            .into(new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_HEIGHT / 2) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
-                        int width = resource.getWidth();
-                        int height = resource.getHeight();
-                        int realHeight = App.SCREEN_WIDTH / WelfareFragment.SPAN_COUNT * height / width;
+                        if (datas.get(holder.getAdapterPosition()).getHeight() <= 0) {
+                            //该item首次加载，即高度还没有确定
+                            int width = resource.getWidth();
+                            int height = resource.getHeight();
+                            int realHeight = App.SCREEN_WIDTH / WelfareFragment.SPAN_COUNT * height / width;
 
-                        ViewGroup.LayoutParams lp = holder.ivGirl.getLayoutParams();
-                        lp.height = realHeight;
-
+                            ViewGroup.LayoutParams lp = holder.ivGirl.getLayoutParams();
+                            lp.height = realHeight;
+                        }
                         holder.ivGirl.setImageBitmap(resource);
                     }
                 }

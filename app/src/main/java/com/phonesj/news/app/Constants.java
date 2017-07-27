@@ -88,6 +88,20 @@ public class Constants {
 
     public static final String INTENT_GANK_TYPE_CODE = "gank_type_code";
 
+    public static final String INTENT_TECH_DETAIL_ID = "tech_detail_id";
+
+    public static final String INTENT_TECH_DETAIL_IMAGE = "tech_detail_image";
+
+    public static final String INTENT_TECH_DETAIL_TITLE = "tech_detail_title";
+
+    public static final String INTENT_TECH_DETAIL_URL = "tech_detail_url";
+
+    public static final String INTENT_TECH_DETAIL_TYPE = "tech_detail_type";
+
+    public static final String INTENT_WELFARE_DETAIL_ID = "welfare_detail_id";
+
+    public static final String INTENT_WELFARE_DETAIL_URL = "welfare_detail_url";
+
     //=======================bundle=========================
     public static final String BUNDLE_ZHIHU_COMMON_ID = "zhihu_common_id";
 

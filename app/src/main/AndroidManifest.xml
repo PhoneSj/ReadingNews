@@ -52,6 +52,16 @@
             android:name=".ui.zhihu.activity.SectionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.gank.activity.TechDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.gank.activity.WelfareDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import com.phonesj.news.base.contract.gank.TechContract;
 import com.phonesj.news.component.ImageLoader;
 import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.presenter.gank.TechPresenter;
+import com.phonesj.news.ui.gank.activity.TechDetailActivity;
 import com.phonesj.news.ui.gank.adapter.TechAdapter;
 import com.phonesj.news.util.SystemUtil;
 
@@ -77,8 +78,14 @@ public class TechFragment extends RootFragment<TechPresenter> implements TechCon
 
         mAdapter.setOnItemClickListener(new TechAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, View view) {
-                // TODO: 2017/7/26
+            public void onItemClick(int position, View shareView) {
+                TechDetailActivity.launch(new TechDetailActivity.Builder()
+                    .setContext(mContext)
+                    .setId(datas.get(position).get_id())
+                    .setTitle(datas.get(position).getDesc())
+                    .setUrl(datas.get(position).getUrl())
+                    .setType(type)
+                    .setAnimConfig(mActivity, shareView));
             }
         });
         viewMain.addOnScrollListener(new RecyclerView.OnScrollListener() {

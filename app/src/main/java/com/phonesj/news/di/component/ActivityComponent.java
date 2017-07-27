@@ -2,6 +2,8 @@ package com.phonesj.news.di.component;
 
 import com.phonesj.news.di.module.ActivityModule;
 import com.phonesj.news.di.scope.ActivityScope;
+import com.phonesj.news.ui.gank.activity.TechDetailActivity;
+import com.phonesj.news.ui.gank.activity.WelfareDetailActivity;
 import com.phonesj.news.ui.main.activity.MainActivity;
 import com.phonesj.news.ui.main.activity.WelcomeActivity;
 import com.phonesj.news.ui.zhihu.activity.SectionActivity;
@@ -32,4 +34,8 @@ public interface ActivityComponent {
     void inject(ThemeActivity themeActivity);
 
     void inject(SectionActivity sectionActivity);
+
+    void inject(TechDetailActivity techDetailActivity);
+
+    void inject(WelfareDetailActivity welfareDetailActivity);
 }

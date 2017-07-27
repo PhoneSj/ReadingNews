@@ -1,7 +1,5 @@
 package com.phonesj.news.model.bean.gank;
 
-import java.util.List;
-
 /**
  * Created by Phone on 2017/7/26.
  */
@@ -30,7 +28,7 @@ public class GankItemBean {
     private String url;
     private boolean used;
     private String who;
-    private List<String> images;
+    private int height;
 
     public String get_id() {
         return _id;
@@ -104,11 +102,11 @@ public class GankItemBean {
         this.who = who;
     }
 
-    public List<String> getImages() {
-        return images;
+    public int getHeight() {
+        return height;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

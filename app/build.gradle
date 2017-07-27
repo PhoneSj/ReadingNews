@@ -41,6 +41,7 @@ dependencies {
     compile rootProject.ext.dependencies["material-calendarview"]
     compile rootProject.ext.dependencies["materialsearchview"]
     compile rootProject.ext.dependencies["multiline-collapsingtoolbar"]
+    compile rootProject.ext.dependencies["PhotoView"]
     compile rootProject.ext.dependencies["glide-transformations"]
 
     //rx

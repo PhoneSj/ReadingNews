@@ -1,16 +1,19 @@
 package com.phonesj.news.ui.gank.fragment;
 
 import com.phonesj.news.R;
+import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RootFragment;
 import com.phonesj.news.base.contract.gank.WelfareContract;
 import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.presenter.gank.WelfarePresenter;
+import com.phonesj.news.ui.gank.activity.WelfareDetailActivity;
 import com.phonesj.news.ui.gank.adapter.WelfareAdapter;
 import com.phonesj.news.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,6 +33,7 @@ public class WelfareFragment extends RootFragment<WelfarePresenter> implements W
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
 
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private List<GankItemBean> datas = new ArrayList<>();
     private WelfareAdapter mAdapter;
     private boolean isLoadingMore = false;
@@ -48,14 +52,20 @@ public class WelfareFragment extends RootFragment<WelfarePresenter> implements W
     protected void initEventAndData() {
         super.initEventAndData();
 
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL);
+        mStaggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        mStaggeredGridLayoutManager.setItemPrefetchEnabled(false);
         mAdapter = new WelfareAdapter(mContext, datas);
-        viewMain.setLayoutManager(new StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL));
+        viewMain.setLayoutManager(mStaggeredGridLayoutManager);
         viewMain.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new WelfareAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                // TODO: 2017/7/26
+                Intent intent = new Intent(mContext, WelfareDetailActivity.class);
+                intent.putExtra(Constants.INTENT_WELFARE_DETAIL_ID, datas.get(position).get_id());
+                intent.putExtra(Constants.INTENT_WELFARE_DETAIL_URL, datas.get(position).getUrl());
+                startActivity(intent);
             }
         });
 
@@ -72,7 +82,7 @@ public class WelfareFragment extends RootFragment<WelfarePresenter> implements W
                 super.onScrolled(recyclerView, dx, dy);
                 int visiableItems[] = ((StaggeredGridLayoutManager) viewMain.getLayoutManager()).findLastVisibleItemPositions(null);
                 int lastItem = Math.max(visiableItems[0], visiableItems[1]);
-                if (lastItem > mAdapter.getItemCount() - 5 && dy > 0 && isLoadingMore) {
+                if (lastItem > mAdapter.getItemCount() - 5 && dy > 0 && !isLoadingMore) {
                     isLoadingMore = true;
                     mPresenter.getMoreWelfareData();
                 }

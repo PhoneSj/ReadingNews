@@ -58,7 +58,9 @@ public abstract class SimpleActivity extends SupportActivity {
         mUnBinder.unbind();
     }
 
-    protected abstract void onViewCreated();
+    protected void onViewCreated() {
+
+    }
 
     protected abstract int getLayout();
 

@@ -5,7 +5,6 @@ import com.phonesj.news.base.contract.gank.WelfareContract;
 import com.phonesj.news.model.DataManager;
 import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.model.http.response.GankHttpResponse;
-import com.phonesj.news.util.LogUtil;
 import com.phonesj.news.util.RxUtil;
 import com.phonesj.news.widget.CommonSubscriber;
 
@@ -41,12 +40,6 @@ public class WelfarePresenter extends RxPresenter<WelfareContract.View> implemen
                 public void onNext(List<GankItemBean> info) {
                     mView.showContent(info);
                     mView.stateMain();
-                }
-
-                @Override
-                public void onError(Throwable t) {
-                    super.onError(t);
-                    LogUtil.w("==============");
                 }
             }));
     }

@@ -60,7 +60,7 @@ public class TechAdapter extends RecyclerView.Adapter<TechAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position, holder.itemView);
+                    onItemClickListener.onItemClick(position, holder.cvTechContent);
                 }
             }
         });
