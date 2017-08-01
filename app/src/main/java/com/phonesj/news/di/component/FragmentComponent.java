@@ -4,8 +4,11 @@ import com.phonesj.news.di.module.FragmentModule;
 import com.phonesj.news.di.scope.FragmentScope;
 import com.phonesj.news.ui.gank.fragment.TechFragment;
 import com.phonesj.news.ui.gank.fragment.WelfareFragment;
+import com.phonesj.news.ui.gold.fragment.GoldMainFragment;
+import com.phonesj.news.ui.gold.fragment.GoldPageFrament;
 import com.phonesj.news.ui.main.fragment.LikeFragment;
 import com.phonesj.news.ui.main.fragment.SettingFragment;
+import com.phonesj.news.ui.wechat.fragment.WechatMainFragment;
 import com.phonesj.news.ui.zhihu.fragment.CommonFragment;
 import com.phonesj.news.ui.zhihu.fragment.DailyFragment;
 import com.phonesj.news.ui.zhihu.fragment.HotFragment;
@@ -39,5 +42,11 @@ public interface FragmentComponent {
     void inject(TechFragment techFragment);
 
     void inject(WelfareFragment welfareFragment);
+
+    void inject(GoldMainFragment goldMainFragment);
+
+    void inject(GoldPageFrament goldPageFrament);
+
+    void inject(WechatMainFragment wechatMainFragment);
 
 }

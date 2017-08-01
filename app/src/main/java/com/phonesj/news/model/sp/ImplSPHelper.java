@@ -22,6 +22,11 @@ public class ImplSPHelper implements SPHelper {
     private static final boolean DEFAULT_NO_IMAGE = false;
     //默认自动保存模式
     private static final boolean DEFAULT_AUTO_SAVE = true;
+
+    private static final boolean DEFAULT_LIKE_POINT = false;
+    private static final boolean DEFAULT_VERSION_POINT = false;
+    private static final boolean DEFAULT_MANAGER_POINT = false;
+
     //MainActivity默认选中的是知乎页面
     private static final int DEFAULT_CURRENT_ITEM = Constants.TYPE_ZHIHU;
 
@@ -70,5 +75,35 @@ public class ImplSPHelper implements SPHelper {
     @Override
     public void setCurrentItem(int key) {
         mSP.edit().putInt(Constants.SP_CURRENT_ITEM, key).apply();
+    }
+
+    @Override
+    public boolean getLikePoint() {
+        return mSP.getBoolean(Constants.SP_LIKE_POINT, DEFAULT_LIKE_POINT);
+    }
+
+    @Override
+    public void setLikePoint(boolean isFirst) {
+        mSP.edit().putBoolean(Constants.SP_LIKE_POINT, isFirst).apply();
+    }
+
+    @Override
+    public boolean getVersionPoint() {
+        return mSP.getBoolean(Constants.SP_VERSION_POINT, DEFAULT_VERSION_POINT);
+    }
+
+    @Override
+    public void setVersionPoint(boolean isFirst) {
+        mSP.edit().putBoolean(Constants.SP_VERSION_POINT, isFirst).apply();
+    }
+
+    @Override
+    public boolean getManagerPoint() {
+        return mSP.getBoolean(Constants.SP_MANAGER_POINT, DEFAULT_MANAGER_POINT);
+    }
+
+    @Override
+    public void setManagerPoint(boolean isFirst) {
+        mSP.edit().putBoolean(Constants.SP_MANAGER_POINT, isFirst).apply();
     }
 }

@@ -29,17 +29,22 @@ public class Constants {
 
     public static final int TYPE_GOLD = 108;
 
-    public static final int TYPE_VTEX = 109;
+    //    public static final int TYPE_VTEX = 109;
 
     public static final int TYPE_SETTING = 110;
 
     public static final int TYPE_LIKE = 111;
 
-    public static final int TYPE_ABOUT = 112;
-
     public static final int ZHIHU_COMMON_TYPE_SHORT = 201;
 
     public static final int ZHIHU_COMMON_TYPE_LONG = 202;
+
+    //==================== key ========================
+    public static final String KEY_API_WECHAT = "f893a2bfbb349984cd5f7d10e37ed6ae";
+
+    public static final String LEANCLOUD_ID = "mhke0kuv33myn4t4ghuid4oq2hjj12li374hvcif202y5bm6";
+
+    public static final String LEANCLOUD_SIGN = "badc5461a25a46291054b902887a68eb,1480438132702";
 
     //================= PATH ====================
 
@@ -62,6 +67,12 @@ public class Constants {
     public static final String SP_AUTO_CACHE = "auto_cache";
 
     public static final String SP_CURRENT_ITEM = "current_item";
+
+    public static final String SP_LIKE_POINT = "like_point";
+
+    public static final String SP_VERSION_POINT = "version_point";
+
+    public static final String SP_MANAGER_POINT = "manager_point";
 
     //========================intent=======================
     public static final String INTENT_ZHIHU_DETAIL_ID = "zhihu_detail_id";
@@ -101,6 +112,12 @@ public class Constants {
     public static final String INTENT_WELFARE_DETAIL_ID = "welfare_detail_id";
 
     public static final String INTENT_WELFARE_DETAIL_URL = "welfare_detail_url";
+
+    public static final String INTENT_GOLD_TYPE = "gold_type";
+
+    public static final String INTENT_GOLD_TYPE_STR = "gold_type_str";
+
+    public static final String INTENT_GOLD_MANAGER = "gold_manager";
 
     //=======================bundle=========================
     public static final String BUNDLE_ZHIHU_COMMON_ID = "zhihu_common_id";

@@ -1,5 +1,6 @@
 package com.phonesj.news.model.db;
 
+import com.phonesj.news.model.bean.gold.GoldManagerBean;
 import com.phonesj.news.model.bean.zhihu.LikeBean;
 
 import java.util.List;
@@ -62,4 +63,19 @@ public interface DBHelper {
      * @param isPlus
      */
     void changeLikeTime(String id, long time, boolean isPlus);
+
+    /**
+     * 更新掘金首页列表
+     *
+     * @param bean
+     */
+    void updateGoldManagerList(GoldManagerBean bean);
+
+    /**
+     * 获取掘金首页列表
+     *
+     * @return
+     */
+    GoldManagerBean getGoldManagerList();
+
 }

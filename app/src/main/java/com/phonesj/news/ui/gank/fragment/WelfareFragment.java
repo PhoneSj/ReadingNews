@@ -8,7 +8,6 @@ import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.presenter.gank.WelfarePresenter;
 import com.phonesj.news.ui.gank.activity.WelfareDetailActivity;
 import com.phonesj.news.ui.gank.adapter.WelfareAdapter;
-import com.phonesj.news.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +102,6 @@ public class WelfareFragment extends RootFragment<WelfarePresenter> implements W
 
     @Override
     public void showContent(List<GankItemBean> info) {
-        LogUtil.w("welfare showContent()");
         if (swipeRefresh != null && swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }

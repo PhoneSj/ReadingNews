@@ -1,5 +1,6 @@
 package com.phonesj.news.model.db;
 
+import com.phonesj.news.model.bean.gold.GoldManagerBean;
 import com.phonesj.news.model.bean.zhihu.LikeBean;
 import com.phonesj.news.model.bean.zhihu.ReadStateBean;
 
@@ -97,5 +98,25 @@ public class RealmHelper implements DBHelper {
             bean.setTime(--time);
         }
         mRealm.commitTransaction();
+    }
+
+    @Override
+    public void updateGoldManagerList(GoldManagerBean bean) {
+        GoldManagerBean data = mRealm.where(GoldManagerBean.class).findFirst();
+        mRealm.beginTransaction();
+        if (data != null) {
+            data.deleteFromRealm();
+        }
+        mRealm.copyToRealm(bean);
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public GoldManagerBean getGoldManagerList() {
+        GoldManagerBean bean = mRealm.where(GoldManagerBean.class).findFirst();
+        if (bean == null) {
+            return null;
+        }
+        return mRealm.copyFromRealm(bean);
     }
 }

@@ -2,8 +2,11 @@ package com.phonesj.news.model;
 
 import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.model.bean.gank.GankSearchBean;
+import com.phonesj.news.model.bean.gold.GoldListBean;
+import com.phonesj.news.model.bean.gold.GoldManagerBean;
 import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
+import com.phonesj.news.model.bean.wechat.WXItemBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
@@ -18,6 +21,8 @@ import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.db.DBHelper;
 import com.phonesj.news.model.http.HttpHelper;
 import com.phonesj.news.model.http.response.GankHttpResponse;
+import com.phonesj.news.model.http.response.GoldHttpResponse;
+import com.phonesj.news.model.http.response.WXHttpResponse;
 import com.phonesj.news.model.sp.SPHelper;
 
 import java.util.List;
@@ -126,6 +131,26 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public Flowable<GoldHttpResponse<List<GoldListBean>>> fetchGoldList(String type, int num, int page) {
+        return mHttpHelper.fetchGoldList(type, num, page);
+    }
+
+    @Override
+    public Flowable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit) {
+        return mHttpHelper.fetchGoldHotList(type, dataTime, limit);
+    }
+
+    @Override
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(int num, int page) {
+        return mHttpHelper.fetchWXInfo(num, page);
+    }
+
+    @Override
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(int num, int page, String word) {
+        return mHttpHelper.fetchWXSearchInfo(num, page, word);
+    }
+
+    @Override
     public boolean getNightModeState() {
         return mSPHelper.getNightModeState();
     }
@@ -166,6 +191,36 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
+    public boolean getLikePoint() {
+        return mSPHelper.getLikePoint();
+    }
+
+    @Override
+    public void setLikePoint(boolean isFirst) {
+        mSPHelper.setLikePoint(isFirst);
+    }
+
+    @Override
+    public boolean getVersionPoint() {
+        return mSPHelper.getVersionPoint();
+    }
+
+    @Override
+    public void setVersionPoint(boolean isFirst) {
+        mSPHelper.setVersionPoint(isFirst);
+    }
+
+    @Override
+    public boolean getManagerPoint() {
+        return mSPHelper.getManagerPoint();
+    }
+
+    @Override
+    public void setManagerPoint(boolean isFirst) {
+        mSPHelper.setManagerPoint(isFirst);
+    }
+
+    @Override
     public void insertNewsId(int id) {
         mDBHelper.insertNewsId(id);
     }
@@ -198,5 +253,15 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     @Override
     public void changeLikeTime(String id, long time, boolean isPlus) {
         mDBHelper.changeLikeTime(id, time, isPlus);
+    }
+
+    @Override
+    public void updateGoldManagerList(GoldManagerBean bean) {
+        mDBHelper.updateGoldManagerList(bean);
+    }
+
+    @Override
+    public GoldManagerBean getGoldManagerList() {
+        return mDBHelper.getGoldManagerList();
     }
 }

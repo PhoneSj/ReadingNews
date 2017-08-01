@@ -69,4 +69,5 @@ dependencies {
     //other
     compile rootProject.ext.dependencies["logger"]
     compile rootProject.ext.dependencies["fragmentation"]
+    compile rootProject.ext.dependencies["fragmentation-swipeback"]
 }

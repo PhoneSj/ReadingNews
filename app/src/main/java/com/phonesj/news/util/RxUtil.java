@@ -2,6 +2,8 @@ package com.phonesj.news.util;
 
 import com.phonesj.news.model.http.execption.ApiException;
 import com.phonesj.news.model.http.response.GankHttpResponse;
+import com.phonesj.news.model.http.response.GoldHttpResponse;
+import com.phonesj.news.model.http.response.WXHttpResponse;
 
 import org.reactivestreams.Publisher;
 
@@ -56,6 +58,49 @@ public class RxUtil {
                             return createData(tGankHttpResponse.getResults());
                         } else {
                             return Flowable.error(new ApiException("服务器返回错误"));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
+     * 统一处理Gold网络请求的返回结果
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> FlowableTransformer<GoldHttpResponse<T>, T> handleGoldResult() {
+        return new FlowableTransformer<GoldHttpResponse<T>, T>() {
+            @Override
+            public Publisher<T> apply(Flowable<GoldHttpResponse<T>> upstream) {
+                return upstream.flatMap(new Function<GoldHttpResponse<T>, Publisher<T>>() {
+                    @Override
+                    public Publisher<T> apply(@NonNull GoldHttpResponse<T> tGoldHttpResponse) throws Exception {
+                        if (tGoldHttpResponse.getResults() != null) {
+                            return createData(tGoldHttpResponse.getResults());
+                        } else {
+                            return Flowable.error(new ApiException("服务器返回错误"));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    public static <T> FlowableTransformer<WXHttpResponse<T>, T> handleWechatResult() {
+        return new FlowableTransformer<WXHttpResponse<T>, T>() {
+            @Override
+            public Publisher<T> apply(Flowable<WXHttpResponse<T>> upstream) {
+                return upstream.flatMap(new Function<WXHttpResponse<T>, Publisher<T>>() {
+                    @Override
+                    public Publisher<T> apply(@NonNull WXHttpResponse<T> twxHttpResponse) throws Exception {
+                        if (twxHttpResponse.getCode() == 200) {
+                            return createData(twxHttpResponse.getNewslist());
+                        } else {
+                            return Flowable.error(new ApiException(twxHttpResponse.getMsg(), twxHttpResponse
+                                .getCode()));
                         }
                     }
                 });

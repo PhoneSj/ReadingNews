@@ -64,28 +64,46 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ArticelViewHolder) {
             ArticelViewHolder articelViewHolder = (ArticelViewHolder) holder;
             articelViewHolder.tvArticleTitle.setText(datas.get(position).getTitle());
             switch (datas.get(position).getType()) {
                 case Constants.TYPE_ZHIHU:
                     ImageLoader.load(mContext, datas
-                        .get(position)
+                        .get(articelViewHolder.getAdapterPosition())
                         .getImage(), R.mipmap.ic_launcher, R.mipmap.ic_launcher, articelViewHolder.ivArticleImage);
-                    articelViewHolder.tvArticleFrom.setText("来自知乎");
+                    articelViewHolder.tvArticleFrom.setText("知乎");
                     break;
                 case Constants.TYPE_ANDROID:
                     articelViewHolder.ivArticleImage.setImageResource(R.mipmap.ic_android);
-                    articelViewHolder.tvArticleFrom.setText("来自干货集中营");
+                    articelViewHolder.tvArticleFrom.setText("干货集中营");
                     break;
                 case Constants.TYPE_IOS:
                     articelViewHolder.ivArticleImage.setImageResource(R.mipmap.ic_ios);
-                    articelViewHolder.tvArticleFrom.setText("来自干货集中营");
+                    articelViewHolder.tvArticleFrom.setText("干货集中营");
                     break;
                 case Constants.TYPE_WEB:
                     articelViewHolder.ivArticleImage.setImageResource(R.mipmap.ic_web);
-                    articelViewHolder.tvArticleFrom.setText("来自干货集中营");
+                    articelViewHolder.tvArticleFrom.setText("干货集中营");
+                    break;
+                case Constants.TYPE_GOLD:
+                    ImageLoader.load(mContext, datas
+                        .get(articelViewHolder.getAdapterPosition())
+                        .getImage(), articelViewHolder.ivArticleImage);
+                    articelViewHolder.tvArticleTitle.setText(datas
+                        .get(articelViewHolder.getAdapterPosition())
+                        .getTitle());
+                    articelViewHolder.tvArticleFrom.setText("稀土掘金");
+                    break;
+                case Constants.TYPE_WECHAT:
+                    ImageLoader.load(mContext, datas
+                        .get(articelViewHolder.getAdapterPosition())
+                        .getImage(), articelViewHolder.ivArticleImage);
+                    articelViewHolder.tvArticleTitle.setText(datas
+                        .get(articelViewHolder.getAdapterPosition())
+                        .getTitle());
+                    articelViewHolder.tvArticleFrom.setText("微信精选");
                     break;
             }
         } else if (holder instanceof WelfareViewHolder) {
@@ -102,7 +120,7 @@ public class LikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoDetail(datas.get(position));
+                gotoDetail(datas.get(holder.getAdapterPosition()));
             }
         });
     }

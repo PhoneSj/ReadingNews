@@ -5,7 +5,6 @@ import com.phonesj.news.base.contract.main.MainContract;
 import com.phonesj.news.component.RxBus;
 import com.phonesj.news.model.DataManager;
 import com.phonesj.news.model.event.NightModeEvent;
-import com.phonesj.news.util.LogUtil;
 import com.phonesj.news.util.RxUtil;
 import com.phonesj.news.widget.CommonSubscriber;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -50,7 +49,6 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
                 @Override
                 public void onError(Throwable t) {
                     super.onError(t);
-                    LogUtil.w("onError");
                     registerEvent();
                     mView.showErrorMsg("主题切换失败");
                 }

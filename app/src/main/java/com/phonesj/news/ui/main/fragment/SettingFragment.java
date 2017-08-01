@@ -60,7 +60,6 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        LogUtil.w("phone", "f  onCreate");
         isNull = savedInstanceState == null;
         super.onCreate(savedInstanceState);
     }
@@ -80,7 +79,6 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
         cbSettingCache.setChecked(mPresenter.getAutoCacheState());
         cbSettingImage.setChecked(mPresenter.getNoImageState());
         cbSettingNight.setChecked(mPresenter.getNightModeState());
-        LogUtil.w("f  nightState:" + mPresenter.getNightModeState());
         cbSettingCache.setOnCheckedChangeListener(this);
         cbSettingImage.setOnCheckedChangeListener(this);
         cbSettingNight.setOnCheckedChangeListener(this);
@@ -114,7 +112,6 @@ public class SettingFragment extends BaseFragment<SettingPresenter> implements S
                     NightModeEvent event = new NightModeEvent();
                     event.setNightMode(b);
                     RxBus.getDefault().post(event);//发送事件到RxBus中，在MainPresenter中注册了该事件
-                    LogUtil.w("f  post");
                 }
                 break;
         }

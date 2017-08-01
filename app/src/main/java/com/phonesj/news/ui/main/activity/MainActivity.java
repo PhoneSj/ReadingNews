@@ -9,13 +9,10 @@ import com.phonesj.news.base.contract.main.MainContract;
 import com.phonesj.news.presenter.main.MainPresenter;
 import com.phonesj.news.ui.gank.fragment.GankMainFragment;
 import com.phonesj.news.ui.gold.fragment.GoldMainFragment;
-import com.phonesj.news.ui.main.fragment.AboutFragment;
 import com.phonesj.news.ui.main.fragment.LikeFragment;
 import com.phonesj.news.ui.main.fragment.SettingFragment;
-import com.phonesj.news.ui.vtex.fragment.VtexMainFragment;
 import com.phonesj.news.ui.wechat.fragment.WechatMainFragment;
 import com.phonesj.news.ui.zhihu.fragment.ZhihuMainFragment;
-import com.phonesj.news.util.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import android.content.DialogInterface;
@@ -51,10 +48,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     WechatMainFragment mWechatMainFragment;
     GankMainFragment mGankMainFragment;
     GoldMainFragment mGoldMainFragment;
-    VtexMainFragment mVtexMainFragment;
     LikeFragment mLikeFragment;
     SettingFragment mSettingFragment;
-    AboutFragment mAboutFragment;
 
     ActionBarDrawerToggle mDrawerToggle;
     MenuItem mLastMenuItem;
@@ -71,13 +66,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LogUtil.w("phone", "a  onCreate");
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             mPresenter.setNightModeState(false);
         } else {
             showFragment = mPresenter.getCurrentItem();//从sp中获得上次选中项
-            LogUtil.w("a  showFragment:" + showFragment);
             hideFragment = Constants.TYPE_ZHIHU;
             showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
             mNavigationView.getMenu().findItem(R.id.drawer_zhihu).setChecked(false);
@@ -102,23 +95,20 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
-        LogUtil.w("a  initEventAndData");
         setToolbar(mToolBar, "知乎日报");
         mZhihuMainFragment = new ZhihuMainFragment();
         mWechatMainFragment = new WechatMainFragment();
         mGankMainFragment = new GankMainFragment();
         mGoldMainFragment = new GoldMainFragment();
-        mVtexMainFragment = new VtexMainFragment();
         mLikeFragment = new LikeFragment();
         mSettingFragment = new SettingFragment();
-        mAboutFragment = new AboutFragment();
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolBar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         mLastMenuItem = mNavigationView.getMenu().findItem(R.id.drawer_zhihu);
-        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mWechatMainFragment, mGankMainFragment, mGoldMainFragment, mVtexMainFragment, mLikeFragment, mSettingFragment, mAboutFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mWechatMainFragment, mGankMainFragment, mGoldMainFragment, mLikeFragment, mSettingFragment);
         //        List<Fragment> list = getSupportFragmentManager().getFragments();
         //        Log.w("phone", "size:" + (list == null ? 0 : list.size()));
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -141,20 +131,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                         showFragment = Constants.TYPE_GOLD;
                         mSearchMenuItem.setVisible(false);
                         break;
-                    case R.id.drawer_vtex:
-                        showFragment = Constants.TYPE_VTEX;
-                        mSearchMenuItem.setVisible(false);
-                        break;
                     case R.id.drawer_like:
                         showFragment = Constants.TYPE_LIKE;
                         mSearchMenuItem.setVisible(false);
                         break;
                     case R.id.drawer_setting:
                         showFragment = Constants.TYPE_SETTING;
-                        mSearchMenuItem.setVisible(false);
-                        break;
-                    case R.id.drawer_about:
-                        showFragment = Constants.TYPE_ABOUT;
                         mSearchMenuItem.setVisible(false);
                         break;
                 }
@@ -176,8 +158,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             public boolean onQueryTextSubmit(String query) {
                 if (showFragment == Constants.TYPE_GANK) {
                     mGankMainFragment.doSearch(query);
+                } else if (showFragment == Constants.TYPE_WECHAT) {
+                    mWechatMainFragment.doSearch(query);
                 }
-                // TODO: 2017/7/26
                 return false;
             }
 
@@ -231,14 +214,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return mGankMainFragment;
             case Constants.TYPE_GOLD:
                 return mGoldMainFragment;
-            case Constants.TYPE_VTEX:
-                return mVtexMainFragment;
             case Constants.TYPE_LIKE:
                 return mLikeFragment;
             case Constants.TYPE_SETTING:
                 return mSettingFragment;
-            case Constants.TYPE_ABOUT:
-                return mAboutFragment;
         }
         return mZhihuMainFragment;
     }
@@ -253,14 +232,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 return R.id.drawer_gank;
             case Constants.TYPE_GOLD:
                 return R.id.drawer_gold;
-            case Constants.TYPE_VTEX:
-                return R.id.drawer_vtex;
             case Constants.TYPE_LIKE:
                 return R.id.drawer_like;
             case Constants.TYPE_SETTING:
                 return R.id.drawer_setting;
-            case Constants.TYPE_ABOUT:
-                return R.id.drawer_about;
         }
         return R.id.drawer_zhihu;
     }

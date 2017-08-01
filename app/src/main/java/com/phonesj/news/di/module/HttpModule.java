@@ -3,10 +3,14 @@ package com.phonesj.news.di.module;
 import com.phonesj.news.BuildConfig;
 import com.phonesj.news.app.Constants;
 import com.phonesj.news.di.qualifier.GankUrl;
+import com.phonesj.news.di.qualifier.GoldUrl;
 import com.phonesj.news.di.qualifier.MyUrl;
+import com.phonesj.news.di.qualifier.WechatUrl;
 import com.phonesj.news.di.qualifier.ZhihuUrl;
 import com.phonesj.news.model.http.api.GankApis;
+import com.phonesj.news.model.http.api.GoldApis;
 import com.phonesj.news.model.http.api.MyApis;
+import com.phonesj.news.model.http.api.WechatApis;
 import com.phonesj.news.model.http.api.ZhihuApis;
 import com.phonesj.news.util.SystemUtil;
 
@@ -57,6 +61,18 @@ public class HttpModule {
 
     @Provides
     @Singleton
+    GoldApis getGoldApis(@GoldUrl Retrofit retrofit) {
+        return retrofit.create(GoldApis.class);
+    }
+
+    @Provides
+    @Singleton
+    WechatApis getWechatApis(@WechatUrl Retrofit retrofit) {
+        return retrofit.create(WechatApis.class);
+    }
+
+    @Provides
+    @Singleton
     @ZhihuUrl
     Retrofit getZhihuRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, ZhihuApis.HOST);
@@ -74,6 +90,20 @@ public class HttpModule {
     @GankUrl
     Retrofit getGankRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, GankApis.HOST);
+    }
+
+    @Provides
+    @Singleton
+    @GoldUrl
+    Retrofit getGoldRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, GoldApis.HOST);
+    }
+
+    @Provides
+    @Singleton
+    @WechatUrl
+    Retrofit getWechatRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, WechatApis.HOST);
     }
 
     @Provides

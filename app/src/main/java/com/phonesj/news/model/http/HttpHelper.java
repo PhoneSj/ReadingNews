@@ -2,8 +2,10 @@ package com.phonesj.news.model.http;
 
 import com.phonesj.news.model.bean.gank.GankItemBean;
 import com.phonesj.news.model.bean.gank.GankSearchBean;
+import com.phonesj.news.model.bean.gold.GoldListBean;
 import com.phonesj.news.model.bean.main.VersionBean;
 import com.phonesj.news.model.bean.main.WelcomeBean;
+import com.phonesj.news.model.bean.wechat.WXItemBean;
 import com.phonesj.news.model.bean.zhihu.CommonBean;
 import com.phonesj.news.model.bean.zhihu.DailyBean;
 import com.phonesj.news.model.bean.zhihu.DailyBeforeBean;
@@ -15,6 +17,8 @@ import com.phonesj.news.model.bean.zhihu.ThemeSubBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailBean;
 import com.phonesj.news.model.bean.zhihu.ZhihuDetailExtraBean;
 import com.phonesj.news.model.http.response.GankHttpResponse;
+import com.phonesj.news.model.http.response.GoldHttpResponse;
+import com.phonesj.news.model.http.response.WXHttpResponse;
 
 import java.util.List;
 
@@ -132,4 +136,12 @@ public interface HttpHelper {
     Flowable<GankHttpResponse<List<GankItemBean>>> fetchRandomGril(int num);
 
     Flowable<GankHttpResponse<List<GankSearchBean>>> fetchGankSearchList(String query, String type, int count, int page);
+
+    Flowable<GoldHttpResponse<List<GoldListBean>>> fetchGoldList(String type, int num, int page);
+
+    Flowable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit);
+
+    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(int num, int page);
+
+    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(int num, int page, String word);
 }

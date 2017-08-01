@@ -121,7 +121,6 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter> implem
                 setTitle(title);
             }
         });
-        LogUtil.w("url:" + url);
         //加载
         wvTechContent.loadUrl(url);
     }

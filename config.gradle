@@ -55,6 +55,7 @@ ext {
 
             //other
             "logger"                     : "com.orhanobut:logger:1.15",
-            "fragmentation"              : "me.yokeyword:fragmentation:0.10.4"
+            "fragmentation"              : "me.yokeyword:fragmentation:1.0.9",
+            "fragmentation-swipeback"    : "me.yokeyword:fragmentation-swipeback:1.0.9"
     ]
 }
