@@ -141,13 +141,13 @@ public class DataManager implements HttpHelper, DBHelper, SPHelper {
     }
 
     @Override
-    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(int num, int page) {
-        return mHttpHelper.fetchWXInfo(num, page);
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(String type, int num, int page) {
+        return mHttpHelper.fetchWXInfo(type, num, page);
     }
 
     @Override
-    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(int num, int page, String word) {
-        return mHttpHelper.fetchWXSearchInfo(num, page, word);
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(String type, int num, int page, String word) {
+        return mHttpHelper.fetchWXSearchInfo(type, num, page, word);
     }
 
     @Override

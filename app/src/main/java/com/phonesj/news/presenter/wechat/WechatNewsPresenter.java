@@ -2,7 +2,7 @@ package com.phonesj.news.presenter.wechat;
 
 import com.phonesj.news.app.Constants;
 import com.phonesj.news.base.RxPresenter;
-import com.phonesj.news.base.contract.wechat.WechatMainContract;
+import com.phonesj.news.base.contract.wechat.WechatNewsContract;
 import com.phonesj.news.component.RxBus;
 import com.phonesj.news.model.DataManager;
 import com.phonesj.news.model.bean.wechat.WXItemBean;
@@ -24,7 +24,7 @@ import io.reactivex.functions.Predicate;
  * Created by Phone on 2017/8/1.
  */
 
-public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> implements WechatMainContract.Presenter {
+public class WechatNewsPresenter extends RxPresenter<WechatNewsContract.View> implements WechatNewsContract.Presenter {
 
     private static final int NUM_OF_PAGE = 20;
 
@@ -32,14 +32,15 @@ public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> im
 
     private int currentPage = 1;
     private String queryStr = null;
+    private String type;
 
     @Inject
-    public WechatMainPresenter(DataManager mDataManager) {
+    public WechatNewsPresenter(DataManager mDataManager) {
         this.mDataManager = mDataManager;
     }
 
     @Override
-    public void attachView(WechatMainContract.View view) {
+    public void attachView(WechatNewsContract.View view) {
         super.attachView(view);
         registerEvent();
     }
@@ -65,7 +66,7 @@ public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> im
                 @Override
                 public void onNext(String s) {
                     queryStr = s;
-                    getSearchWechatData();
+                    getSearchWechatData(type);
                 }
 
                 @Override
@@ -77,11 +78,12 @@ public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> im
     }
 
     @Override
-    public void getWechatData() {
+    public void getWechatData(String type) {
+        this.type = type;
         queryStr = null;
         currentPage = 1;
         addSubscribe(mDataManager
-            .fetchWXInfo(NUM_OF_PAGE, currentPage)
+            .fetchWXInfo(type, NUM_OF_PAGE, currentPage)
             .compose(RxUtil.<WXHttpResponse<List<WXItemBean>>>rxSchedulerHelper())
             .compose(RxUtil.<List<WXItemBean>>handleWechatResult())
             .subscribeWith(new CommonSubscriber<List<WXItemBean>>(mView, "访问微信精选失败") {
@@ -93,13 +95,13 @@ public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> im
     }
 
     @Override
-    public void getMoreWechatData() {
+    public void getMoreWechatData(String type) {
         Flowable<WXHttpResponse<List<WXItemBean>>> flowable;
         currentPage++;
         if (queryStr != null) {
-            flowable = mDataManager.fetchWXSearchInfo(NUM_OF_PAGE, currentPage, queryStr);
+            flowable = mDataManager.fetchWXSearchInfo(type, NUM_OF_PAGE, currentPage, queryStr);
         } else {
-            flowable = mDataManager.fetchWXInfo(NUM_OF_PAGE, currentPage);
+            flowable = mDataManager.fetchWXInfo(type, NUM_OF_PAGE, currentPage);
         }
         addSubscribe(flowable
             .compose(RxUtil.<WXHttpResponse<List<WXItemBean>>>rxSchedulerHelper())
@@ -112,10 +114,10 @@ public class WechatMainPresenter extends RxPresenter<WechatMainContract.View> im
             }));
     }
 
-    public void getSearchWechatData() {
+    public void getSearchWechatData(String type) {
         currentPage = 1;
         addSubscribe(mDataManager
-            .fetchWXSearchInfo(NUM_OF_PAGE, currentPage, queryStr)
+            .fetchWXSearchInfo(type, NUM_OF_PAGE, currentPage, queryStr)
             .compose(RxUtil.<WXHttpResponse<List<WXItemBean>>>rxSchedulerHelper())
             .compose(RxUtil.<List<WXItemBean>>handleWechatResult())
             .subscribeWith(new CommonSubscriber<List<WXItemBean>>(mView, "访问微信精选失败") {

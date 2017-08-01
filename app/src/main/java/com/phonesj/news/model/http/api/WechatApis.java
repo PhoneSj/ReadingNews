@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -17,9 +18,9 @@ public interface WechatApis {
 
     String HOST = "http://api.tianapi.com/";
 
-    @GET("wxnew")
-    Flowable<WXHttpResponse<List<WXItemBean>>> getWechatHot(@Query("key") String key, @Query("num") int num, @Query("page") int page);
+    @GET("{type}")
+    Flowable<WXHttpResponse<List<WXItemBean>>> getWechatHot(@Path("type") String type, @Query("key") String key, @Query("num") int num, @Query("page") int page);
 
-    @GET("wxnew")
-    Flowable<WXHttpResponse<List<WXItemBean>>> getWechatHotSearch(@Query("key") String key, @Query("num") int num, @Query("page") int page, @Query("word") String word);
+    @GET("{type}")
+    Flowable<WXHttpResponse<List<WXItemBean>>> getWechatHotSearch(@Path("type") String type, @Query("key") String key, @Query("num") int num, @Query("page") int page, @Query("word") String word);
 }

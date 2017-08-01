@@ -10,16 +10,16 @@ import java.util.List;
  * Created by Phone on 2017/8/1.
  */
 
-public interface WechatMainContract {
-    interface View extends BaseView{
+public interface WechatNewsContract {
+    interface View extends BaseView {
         void showContent(List<WXItemBean> info);
 
         void showMoreContent(List<WXItemBean> info);
     }
 
-    interface Presenter extends BasePresenter<View>{
-        void getWechatData();
+    interface Presenter extends BasePresenter<View> {
+        void getWechatData(String type);
 
-        void getMoreWechatData();
+        void getMoreWechatData(String type);
     }
 }

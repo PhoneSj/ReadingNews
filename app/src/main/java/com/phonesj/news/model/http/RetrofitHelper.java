@@ -149,13 +149,13 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(int num, int page) {
-        return wechatApis.getWechatHot(Constants.KEY_API_WECHAT, num, page);
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(String type, int num, int page) {
+        return wechatApis.getWechatHot(type, Constants.KEY_API_WECHAT, num, page);
     }
 
     @Override
-    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(int num, int page, String word) {
-        return wechatApis.getWechatHotSearch(Constants.KEY_API_WECHAT, num, page, word);
+    public Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(String type, int num, int page, String word) {
+        return wechatApis.getWechatHotSearch(type, Constants.KEY_API_WECHAT, num, page, word);
     }
 
 }

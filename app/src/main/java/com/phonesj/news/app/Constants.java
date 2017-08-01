@@ -124,5 +124,9 @@ public class Constants {
 
     public static final String BUNDLE_ZHIHU_COMMON_KIND = "zhihu_common_kind";
 
+    public static final String BUNDLE_WECHAT_NEWS_TITLE = "wechat_news_title";
+
+    public static final String BUNDLE_WECHAT_NEWS_TYPE = "wechat_news_type";
+
 
 }

@@ -141,7 +141,7 @@ public interface HttpHelper {
 
     Flowable<GoldHttpResponse<List<GoldListBean>>> fetchGoldHotList(String type, String dataTime, int limit);
 
-    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(int num, int page);
+    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXInfo(String type, int num, int page);
 
-    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(int num, int page, String word);
+    Flowable<WXHttpResponse<List<WXItemBean>>> fetchWXSearchInfo(String type, int num, int page, String word);
 }

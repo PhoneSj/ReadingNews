@@ -5,6 +5,7 @@ import com.phonesj.news.app.Constants;
 import com.phonesj.news.component.ImageLoader;
 import com.phonesj.news.model.bean.wechat.WXItemBean;
 import com.phonesj.news.ui.gank.activity.TechDetailActivity;
+import com.phonesj.news.util.LogUtil;
 
 import java.util.List;
 
@@ -22,12 +23,12 @@ import butterknife.ButterKnife;
  * Created by Phone on 2017/8/1.
  */
 
-public class WechatMainAdapter extends RecyclerView.Adapter<WechatMainAdapter.ViewHolder> {
+public class WechatNewsAdapter extends RecyclerView.Adapter<WechatNewsAdapter.ViewHolder> {
 
     private Context mContext;
     private List<WXItemBean> datas;
 
-    public WechatMainAdapter(Context mContext, List<WXItemBean> datas) {
+    public WechatNewsAdapter(Context mContext, List<WXItemBean> datas) {
         this.mContext = mContext;
         this.datas = datas;
     }
@@ -54,7 +55,7 @@ public class WechatMainAdapter extends RecyclerView.Adapter<WechatMainAdapter.Vi
                     .setTitle(datas.get(holder.getAdapterPosition()).getTitle())
                     .setUrl(datas.get(holder.getAdapterPosition()).getUrl())
                     .setType(Constants.TYPE_WECHAT));//使用图片作为数据库的位移标示
-
+                LogUtil.w("url:" + datas.get(position).getUrl());
             }
         });
     }
